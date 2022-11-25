@@ -3,7 +3,7 @@ const { Schema, model, Types} = require("../connection");
 const mySchema = new Schema ({
     title : String,
     data : Object,
-    createdBy : { type: Types.ObjectId, ref: "user"},
+    user : { type: Types.ObjectId, ref: "users"},
     createdAt : Date,
     lastUpdate : Date
 });

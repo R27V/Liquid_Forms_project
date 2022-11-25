@@ -81,19 +81,13 @@ const Header = () => {
                       setLoggedin(false);
                     }}
                   >
-                      <NavLink className="nav-link" to="/login">
-                    <i className="fas fa-sign-out-alt"></i>Logout</NavLink>
+                      
+                    <i className="fas fa-sign-out-alt"></i>Logout
                   </button>
                 ) : (
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => {
-                      setLoggedin(true);
-                    }}
-                  >
-                    <NavLink className="nav-link" to="/login">
+                  
+                    <NavLink className="btn btn-primary" to="/login">
                     <i className="fas fa-sign-in"></i> Login</NavLink>
-                  </button>
                 )}
               </li>
             </ul>

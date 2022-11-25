@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from './components/admin/Header';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -19,6 +19,7 @@ function App() {
       <BrowserRouter>
       <Header />
       <Routes>
+        <Route element={<Navigate to="/home"/>} path="/" />
         <Route element={<Home/>} path="home" />
         <Route element={<Login/>} path="login" />
         <Route element={<Signup/>} path="signup" />
@@ -27,8 +28,6 @@ function App() {
         <Route element={<ContactInfo/>} path="contactInfo" />
         <Route element={<AddForm/>} path="addForm/:formid" />
         <Route element={<ListForms/>} path="listForm" />
-
-        
       </Routes>
       <Footer />
 
