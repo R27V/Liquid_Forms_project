@@ -56,7 +56,7 @@ const Signup = () => {
         boxShadow:
           "2px 2px 4px 2px rgb(0 0 0 / 31%), -2px -2px 3px 2px rgb(0 0 0 / 31%)",
         borderRadius: "5px",
-        // backgroundImage: `url(http://chitrahandicraft.com/wp-content/uploads/2019/02/login-page-background-images-hd-10.jpg)`,
+        backgroundImage: `url(http://chitrahandicraft.com/wp-content/uploads/2019/02/login-page-background-images-hd-10.jpg)`,
         height: "100vh",
       }}
     >

@@ -1,8 +1,14 @@
 import React from "react";
 import { Formik } from "formik";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import { Button,TextField } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+} from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -45,11 +51,12 @@ const Login = () => {
       className="d-flex flex-column align-items-center justify-content-center"
       style={{
         backgroundImage: `url(https://wallpaperaccess.com/full/1900932.jpg)`,
+        backgroundSize: "cover",
         height: "100vh",
       }}
     >
       <div className="container d-flex align-items-center justify-content-center">
-        <div className="card" style={{ width: "500px", height: "300px" }}>
+        <div className="card" style={{ width: "500px", height: "350px" }}>
           <div className="card-body">
             <Formik
               initialValues={{ email: "", password: "" }}
@@ -86,33 +93,26 @@ const Login = () => {
                       onChange={handleChange}
                     />
                   </div>
-
-                  {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={handleChange('password')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-          />
-        </FormControl> */}
-
-                  <Button type="submit" variant="contained">
-                    Submit
-                  </Button>
+                  <div className="form-group clearfix">
+                    <div className="custom-control custom-checkbox float-left m-6">
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox defaultChecked />}
+                          label="Remember me"
+                        />
+                      </FormGroup>
+                    </div>
+                    <div className="forgot float-right m-6">
+                      <a href="#" id="forgot-link">
+                        Forgot Password?
+                      </a>
+                    </div>
+                  </div>
+                  <div>
+                    <Button type="submit" variant="contained">
+                      Submit
+                    </Button>
+                  </div>
                 </form>
               )}
             </Formik>

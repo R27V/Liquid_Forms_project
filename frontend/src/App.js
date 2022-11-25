@@ -1,14 +1,15 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from './components/Header';
+import Header from './components/admin/Header';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ManageAssets from './components/ManageAssets';
-import UserManager from './components/UserManager';
+import UserManager from './components/admin/UserManager';
 import ContactInfo from './components/ContactInfo';
 import AddForm from './components/AddForm';
 import ListForms from './components/ListForms';
+import Footer from './components/Footer';
 
 
 
@@ -29,6 +30,7 @@ function App() {
 
         
       </Routes>
+      <Footer />
 
       </BrowserRouter>
     </div>
