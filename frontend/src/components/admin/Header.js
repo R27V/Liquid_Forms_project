@@ -12,7 +12,7 @@ const Header = () => {
         style={{ backgroundColor: "#232a69" }}
       >
         {/* Container wrapper */}
-        <div className="container-fluid">
+        <div>
           {/* Toggle button */}
           <button
             className="navbar-toggler"
@@ -30,15 +30,15 @@ const Header = () => {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {/* Link */}
               <li className="nav-item">
+              {/* <img src="projectLogo.jpg" /> */}
+              </li>
+
+              <li className="nav-item">
                 <NavLink className="nav-link" to="/home">
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/login">
-                  Login
-                </NavLink>
-              </li>
+              
               <li className="nav-item">
                 <NavLink className="nav-link" to="/signup">
                   Sign Up
@@ -60,7 +60,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/addForm">
+                <NavLink className="nav-link" to="/login">
                   Add Form
                 </NavLink>
               </li>
@@ -81,7 +81,8 @@ const Header = () => {
                       setLoggedin(false);
                     }}
                   >
-                    <i className="fas fa-sign-out-alt"></i>Logout
+                      <NavLink className="nav-link" to="/login">
+                    <i className="fas fa-sign-out-alt"></i>Logout</NavLink>
                   </button>
                 ) : (
                   <button
@@ -90,20 +91,13 @@ const Header = () => {
                       setLoggedin(true);
                     }}
                   >
-                    <i className="fas fa-sign-in"></i> Login
+                    <NavLink className="nav-link" to="/login">
+                    <i className="fas fa-sign-in"></i> Login</NavLink>
                   </button>
                 )}
               </li>
             </ul>
-            {/* Search */}
-            <form className="w-auto">
-              <input
-                type="search"
-                className="form-control"
-                placeholder="Type query"
-                aria-label="Search"
-              />
-            </form>
+           
           </div>
         </div>
       </nav>
