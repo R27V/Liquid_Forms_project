@@ -30,7 +30,7 @@ const Header = () => {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {/* Link */}
               <li className="nav-item">
-              {/* <img src="projectLogo.jpg" /> */}
+              <img src="logo.jpg" />
               </li>
 
               <li className="nav-item">

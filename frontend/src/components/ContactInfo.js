@@ -7,12 +7,12 @@ const ContactInfo = () =>{
             <div className="container d-flex align-items-center justify-content-center">
         <div className="card">
           <div className="card-body">
-            
-          <section>
-            <div className='m-4'>
+          <div className='m-4'>
                 <h2>Contact Information</h2>
                 <hr/>
             </div>
+          <section className='m-4'>
+            
             <TextField fullWidth id="standard-basic" label="Form description" variant="standard" />
         
           </section>

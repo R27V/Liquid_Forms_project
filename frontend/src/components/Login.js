@@ -35,7 +35,8 @@ const Login = () => {
         text: "Loggedin Successfully",
       });
 
-      navigate("/addForm/:formid");
+      // navigate("/addForm/:formid");
+      navigate("/listForm");
     } else if (response.status === 401) {
       Swal.fire({
         icon: "error",

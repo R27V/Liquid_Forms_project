@@ -63,21 +63,6 @@ const AddForm = () => {
     JSON.parse(sessionStorage.getItem("user"))
   );
 
-  const courseForm = {
-    title: "",
-    description: "",
-    category: "web dev",
-    prerequisites: [],
-    thumbnail: "",
-    target: "",
-    data: {},
-    pricing: 0,
-    trainer: currentUser._id,
-    created: new Date(),
-    duration: 0,
-    reviews: Array,
-  };
-
   const onFormSubmit = (formdata) => {
     console.log("click on button to submit form");
     setTempForm(formdata);
@@ -234,6 +219,7 @@ const AddForm = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    alert(event);
   };
 
   const renderCourse = () => {
@@ -381,7 +367,7 @@ const AddForm = () => {
                     // className="w-50 mb-4"
                     id="standard-basic"
                     onChange={handleChange}
-                    value={values.title}
+                    // value={values.title}
                     // className="form-control form-control-lg"
                     // helperText={touched.username ? errors.username : ''}
                     // error={Boolean(errors.username && touched.username)}
@@ -394,7 +380,7 @@ const AddForm = () => {
                     // className="w-50 mb-4"
                     id="standard-basic"
                     onChange={handleChange}
-                    value={values.description}
+                    // value={values.description}
                     // className="form-control form-control-lg"
                     // helperText={touched.email ? errors.email : ''}
                     // error={Boolean(errors.email && touched.email)}
@@ -410,11 +396,11 @@ const AddForm = () => {
 
           <div className="form-customizer">{renderCourse()}</div>
 
-          <Formik initialValues={courseForm} onSubmit={onFormSubmit}>
+          {/* <Formik initialValues={courseForm} onSubmit={onFormSubmit}>
             {({ values, handleChange, handleSubmit, isSubmitting }) => (
               <form onSubmit={handleSubmit}></form>
             )}
-          </Formik>
+          </Formik> */}
           
         </TabPanel>
 

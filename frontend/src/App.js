@@ -26,7 +26,7 @@ function App() {
         <Route element={<ManageAssets/>} path="manageAsset" />
         <Route element={<UserManager/>} path="userManager" />
         <Route element={<ContactInfo/>} path="contactInfo" />
-        <Route element={<AddForm/>} path="addForm/:formid" />
+        <Route element={<AddForm/>} path="editform/:formid" />
         <Route element={<ListForms/>} path="listForm" />
       </Routes>
       <Footer />

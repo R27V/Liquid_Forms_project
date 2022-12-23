@@ -2,6 +2,7 @@ const { Schema, model, Types} = require("../connection");
 
 const mySchema = new Schema ({
     title : String,
+    description : String,
     data : Object,
     user : { type: Types.ObjectId, ref: "users"},
     createdAt : Date,
