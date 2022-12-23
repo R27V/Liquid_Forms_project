@@ -60,8 +60,8 @@ const ListForms = () => {
 const createNewFormBox = () => {
   return (
   <div className="col-sm-6 col-md-4">
-  <div className="card" style={{borderRadius:'89px',height:'90%'}}>
-    <div className="card-body" style={{marginTop: '27%', marginLeft: '9%'}}>
+  <div className="card d-flex flex-column align-items-center justify-content-center" style={{borderRadius:'89px',height:'90%'}}>
+    <div className="card-body" style={{marginTop: '20%', marginLeft: '9%'}}>
       <h5 className="card-title"></h5>
       <p className="card-text">
   <Link to={"/editform/new"} className="btn btn-primary">

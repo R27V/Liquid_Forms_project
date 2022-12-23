@@ -9,6 +9,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  ClickAwayListener,
   FormControl,
   InputBase,
   InputLabel,
@@ -39,23 +40,10 @@ const AddForm = () => {
   const [tempForm, setTempForm] = useState({});
 
   const [value, setValue] = React.useState(0);
-  const [formData, setFormData] = React.useState({
-    sections: [
-      {
-        name: "Untitled Section",
-        description: "",
-        questions: [
-          {
-            name: "",
-            marks: "",
-            answertype: "shorttext",
-          },
-        ],
-      },
-    ],
-  });
+  const [formData, setFormData] = React.useState(null);
 
   const [dataReady, setDataReady] = React.useState(false);
+  const [formLoaded, setFormLoaded] = useState(false);
 
   const [imgPath, setImgPath] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -211,10 +199,20 @@ const AddForm = () => {
   //   }
   // };
 
+  const getformById = async () => {
+    const response = await fetch(url+'/getbyid/'+formid);
+    const dbFormData = await response.json();
+    console.log(dbFormData);
+
+    setFormData(dbFormData.data);
+    setFormData(true);
+  }
+
   React.useEffect(() => {
     console.log(formData);
     setDataReady(true);
     console.log(dataReady);
+    getformById();
   }, []);
 
   const handleChange = (event, newValue) => {
@@ -225,7 +223,8 @@ const AddForm = () => {
   const renderCourse = () => {
     return (
       <div className="">
-        {formData.sections.map((section, sect_i) => (
+
+        { formLoaded? formData.sections.map((section, sect_i) => (
           <div className="card">
           <div className="form-section" key={sect_i}>
             <h3>
@@ -291,8 +290,11 @@ const AddForm = () => {
               ADD NEW QUESTION
             </Button>
           </div></div>
-        ))}
-        {/* <button onClick={addNewSection}>Add New Section</button> */}
+        ))
+        :
+        "Form Loading"
+            
+      }
         <Button onClick={addNewSection} variant="contained">
           Add New Section
         </Button>
@@ -333,8 +335,22 @@ const AddForm = () => {
     });
   };
 
+  const updateForm = async () => {
+    const res = await fetch(url+'/form/getall', {
+      method: 'PUT',
+      body : JSON.stringify({
+
+      })
+    });
+    const data = await res.json();
+
+    console.log(res.status);
+    
+  }
+
   return (
     <div className="col-md-8 mx-auto pt-4 w-100">
+      <button className="btn btn-primary" onClick={updateForm}>Save Form</button>
       {/* <div className="container"> */}
         <Paper square>
           <Tabs

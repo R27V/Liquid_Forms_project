@@ -13,11 +13,14 @@ import React from "react";
       </footer> */}
     <div className="d-flex flex-column align-items-center justify-content-center">
      
-          <h1>Get insights quickly, with Liquid Forms</h1>
+          <h1>Get insights quickly, with Digital Forms</h1>
          
           
-        <p>Easily create and share online forms and surveys, and analyze responses in real-time.</p>
-        <div>Already have a account? Sign in  </div>
+        <p>Easily create professional online forms, surveys and workflows and analyze responses in real-time.</p>
+        
+        <div className="d flex  flex-column align-items-left justify-content-left">
+          <img src="templates1.png" />
+        </div>
           
      </div>
    
