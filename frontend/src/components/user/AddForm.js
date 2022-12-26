@@ -9,7 +9,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
-  ClickAwayListener,
   FormControl,
   InputBase,
   InputLabel,
@@ -25,7 +24,7 @@ import React, { useState } from "react";
 import { Ballot } from "@mui/icons-material";
 import { Formik } from "formik";
 import Swal from "sweetalert2";
-import app_config from "../config";
+import app_config from "../../config";
 import { useParams } from "react-router-dom";
 // import './addForm.css';
 
