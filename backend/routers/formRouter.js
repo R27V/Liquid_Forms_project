@@ -48,7 +48,7 @@ router.get("/getbyuser/:userid", (req, res) => {
 
 // to fetch data by Id
 router.get("/getbyid/:id", (req, res) => {
-  console.log(req, params.id);
+  console.log(req.params.id);
   Model.findById(req.params.id)
     .then((result) => {
       console.log(result);

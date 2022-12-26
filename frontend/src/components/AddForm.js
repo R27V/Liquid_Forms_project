@@ -57,26 +57,6 @@ const AddForm = () => {
     console.log(formdata);
   };
 
-  const createCourse = () => {
-    let formdata = tempForm;
-    formdata["data"] = formData;
-    formdata["thumbnail"] = avatar;
-    console.log(formdata);
-    fetch(url + "/course/add", {
-      method: "POST",
-      body: JSON.stringify(formdata),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        Swal.fire({
-          icon: "success",
-          title: "Sucess",
-          text: "Course Added Successfully",
-        });
-      });
-  };
 
   const addNewSection = () => {
     const newSection = {
@@ -200,7 +180,7 @@ const AddForm = () => {
   // };
 
   const getformById = async () => {
-    const response = await fetch(url+'/getbyid/'+formid);
+    const response = await fetch(url+'/form/getbyid/'+formid);
     const dbFormData = await response.json();
     console.log(dbFormData);
 

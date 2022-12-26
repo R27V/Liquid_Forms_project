@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const ListForms = () => {
-  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
   const [formList, setFormList] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const getDataFromBackend = async () => {
     setLoading(true);
-    const response = await fetch('http://localhost:5000/form/getbyuser/' + currentUser._id)
+    const response = await fetch(
+      "http://localhost:5000/form/getbyuser/" + currentUser._id
+    );
 
-    const data = await response.json()
+    const data = await response.json();
     console.log(data);
     setFormList(data);
     setLoading(false);
@@ -19,8 +23,7 @@ const ListForms = () => {
 
   useEffect(() => {
     getDataFromBackend();
-  }, [])
-
+  }, []);
 
   const createNewForm = async () => {
     const formdata = {
@@ -57,60 +60,62 @@ const ListForms = () => {
     // navigate('/addform/'+data._id);
   };
 
-const createNewFormBox = () => {
-  return (
-  <div className="col-sm-6 col-md-4">
-  <div className="card d-flex flex-column align-items-center justify-content-center" style={{borderRadius:'89px',height:'90%'}}>
-    <div className="card-body" style={{marginTop: '20%', marginLeft: '9%'}}>
-      <h5 className="card-title"></h5>
-      <p className="card-text">
-  <Link to={"/editform/new"} className="btn btn-primary">
-        Create Form
-      </Link>
-      </p>
+  const createNewFormBox = () => {
+    return (
+      <div className="col-sm-6 col-md-4">
+        <div
+          className="card d-flex flex-column align-items-center justify-content-center"
+          style={{ borderRadius: "89px", height: "90%" }}
+        >
+          <div
+            className="card-body"
+            style={{ marginTop: "20%", marginLeft: "9%" }}
+          >
+            <h5 className="card-title"></h5>
+            <p className="card-text">
+              <Link to={"/editform/new"} className="btn btn-primary">
+                Create Form
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
-  </div>
-</div>
-  )
-} 
-
+    );
+  };
 
   const displayTemplates = () => {
     if (!loading && formList)
-      return (formList.map(form => (
+      return formList.map((form) => (
         <div className="col-sm-6 col-md-4">
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">{form.title}</h5>
               <p className="card-text">
-              {form.description ? form.description :'With supporting text below as a natural lead-in to additional content'}
+                {form.description
+                  ? form.description
+                  : "With supporting text below as a natural lead-in to additional content"}
               </p>
-              <Link to={"/editform/"+form._id} className="btn btn-primary">
+              <Link to={"/editform/" + form._id} className="btn btn-primary">
                 Edit Form
               </Link>
             </div>
           </div>
         </div>
-      ))
-      )
-    else
-      return <h1>Loading...</h1>
-
-  }
+      ));
+    else return <h1>Loading...</h1>;
+  };
 
   return (
     <div>
       <header className="bg-dark">
         <div className="container py-5">
-
-
           <h1 className="display-1 text-center">Form List</h1>
         </div>
       </header>
 
       <div className="container">
         <div className="row">
-{createNewFormBox()}
+          {/* {createNewFormBox()} */}
           {displayTemplates()}
         </div>
       </div>
@@ -119,7 +124,6 @@ const createNewFormBox = () => {
         {" "}
         Submit
       </button>
-
     </div>
   );
 };
