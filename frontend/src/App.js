@@ -15,37 +15,41 @@ import Admin from "./components/admin";
 import User from "./components/user";
 import Profile from "./components/user/Profile";
 import UpdateUser from "./components/admin/UpdateUser";
+import UserAuth from "./UserAuth";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header />
         <Routes>
           <Route element={<Navigate to="/main/home" />} path="/" />
 
-          <Route element={<Main />} path="main" />
-          <Route element={<Home />} path="main/home" />
-          <Route element={<Login />} path="main/login" />
-          <Route element={<Signup />} path="main/signup" />
-          <Route element={<ContactInfo />} path="main/contactInfo" />
-          {/* </Route> */}
+          <Route element={<Main />} path="main">
+            <Route element={<Home />} path="home" />
+            <Route element={<Login />} path="login" />
+            <Route element={<Signup />} path="signup" />
+            <Route element={<ContactInfo />} path="contactInfo" />
+          </Route>
 
-          <Route element={<Admin />} path="admin" />
+          <Route element={<Admin />} path="admin">
             <Route element={<UserManager />} path="admin/usermanager" />
             <Route element={<UpdateUser />} path="admin/updateuser" />
+          </Route>
 
-          {/* </Route> */}
-
-          <Route element={<User />} path="user" />
-            <Route element={<ManageAssets />} path="user/manageAsset" />
-            <Route element={<AddForm />} path="user/editform/:formid" />
-            <Route element={<ListForms />} path="user/listForm" />
-            <Route element={<Profile />} path="user/profile" />
-
-          {/* </Route> */}
+          <Route
+            element={
+              <UserAuth>
+                <User />
+              </UserAuth>
+            }
+            path="user"
+          >
+            <Route element={<ManageAssets />} path="manageAsset" />
+            <Route element={<AddForm />} path="editform/:formid" />
+            <Route element={<ListForms />} path="listForm" />
+            <Route element={<Profile />} path="profile" />
+          </Route>
         </Routes>
-        <Footer />
       </BrowserRouter>
     </div>
   );

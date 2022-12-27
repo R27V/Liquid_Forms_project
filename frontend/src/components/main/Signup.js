@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Swal } from "sweetalert";
+import Swal from "sweetalert2";
 import * as Yup from 'yup';
 import "./Signup.css";
 
