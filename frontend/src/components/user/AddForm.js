@@ -9,6 +9,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  ClickAwayListener,
   FormControl,
   InputBase,
   InputLabel,
@@ -56,7 +57,6 @@ const AddForm = () => {
     console.log(formdata);
   };
 
-
   const addNewSection = () => {
     const newSection = {
       name: "Untitled Section",
@@ -86,7 +86,7 @@ const AddForm = () => {
     setFormData(newData);
   };
 
-  const addNewQuestion = (sect_index) => {
+  const addNewQuestion = (ques_index) => {
     const newQuestion = {
       name: "Untitled question",
       description: "question Description",
@@ -94,33 +94,24 @@ const AddForm = () => {
       resources: [],
     };
 
-    const sections = {};
-    sections[sect_index] = { questions: { $push: [newQuestion] } };
+    const questions = {};
+    questions[ques_index] = { questions: { $push: [newQuestion] } };
 
     const newData = update(formData, {
-      sections: sections,
+      questions: questions,
     });
 
     setFormData(newData);
   };
 
   const handleRename = (prop, val, sect_i, ques_i) => {
-    const sections = {};
     const questions = {};
-    if (prop == "lect_name") {
+    if (prop === "ques_name") {
       questions[ques_i] = { name: { $set: val } };
-      sections[sect_i] = { questions: questions };
-    } else if (prop == "lect_desc") {
-      questions[ques_i] = { description: { $set: val } };
-      sections[sect_i] = { questions: questions };
-    } else if (prop == "sect_name") {
-      sections[sect_i] = { name: { $set: val } };
-    } else if (prop == "sect_desc") {
-      sections[sect_i] = { description: { $set: val } };
     }
 
     const newData = update(formData, {
-      sections: sections,
+      questions: questions,
     });
 
     setFormData(newData);
@@ -179,13 +170,13 @@ const AddForm = () => {
   // };
 
   const getformById = async () => {
-    const response = await fetch(url+'/form/getbyid/'+formid);
+    const response = await fetch(url + "/form/getbyid/" + formid);
     const dbFormData = await response.json();
     console.log(dbFormData);
 
     setFormData(dbFormData.data);
-    setFormData(true);
-  }
+    setFormLoaded(true);
+  };
 
   React.useEffect(() => {
     console.log(formData);
@@ -202,78 +193,31 @@ const AddForm = () => {
   const renderCourse = () => {
     return (
       <div className="">
-
-        { formLoaded? formData.sections.map((section, sect_i) => (
-          <div className="card">
-          <div className="form-section" key={sect_i}>
-            <h3>
-              Section {`${sect_i + 1}: `}
-              <InputBase
-                className="section-input"
-                value={section.name}
-                onChange={(e) =>
-                  handleRename("sect_name", e.target.value, sect_i, 0)
-                }
-              ></InputBase>
-            </h3>
-            <InputBase
-              value={section.description}
-              onChange={(e) =>
-                handleRename("sect_desc", e.target.value, sect_i, 0)
-              }
-            ></InputBase>
-            {section.questions.map((question, ques_i) => (
-              <Accordion key={ques_i}>
-                <AccordionSummary expandIcon={<ExpandMore />}>
-                  <h4>
-                    question {`${ques_i + 1}: `}
+        {formLoaded
+          ? formData.questions.map((question, ques_i) => (
+              <div className="card">
+                <div className="form-section" key={ques_i}>
+                  <h3>
+                    Section {`${ques_i + 1}: `}
                     <InputBase
+                      className="section-input"
                       value={question.name}
                       onChange={(e) =>
-                        handleRename(
-                          "ques_name",
-                          e.target.value,
-                          sect_i,
-                          ques_i
-                        )
+                        handleRename("ques_name", e.target.value, ques_i, 0)
                       }
                     ></InputBase>
-                  </h4>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <FormControl fullWidth>
-                    <InputLabel id="sel-answer-type">
-                      Select Answer Type
-                    </InputLabel>
-                    <Select
-                      labelId="sel-answer-type"
-                      id="sel-answer"
-                      value={question.answertype}
-                      label="Select Answer Type"
-                      // onChange={handleChange}
-                    >
-                      {answerTypes.map((type) => (
-                        <MenuItem value={type}>{type}</MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </AccordionDetails>
+                  </h3>
 
-                <AccordionActions></AccordionActions>
-              </Accordion>
-            ))}
-            {/* <Button onClick={(e) => addNewQuestion(sect_i)}>
-              Add New question
-            </Button> */}
-            <Button onClick={(e) => addNewQuestion(sect_i)} variant="outlined">
-              ADD NEW QUESTION
-            </Button>
-          </div></div>
-        ))
-        :
-        "Form Loading"
-            
-      }
+                  <Button
+                    onClick={(e) => addNewQuestion(ques_i)}
+                    variant="outlined"
+                  >
+                    ADD NEW QUESTION
+                  </Button>
+                </div>
+              </div>
+            ))
+          : "Form Loading"}
         <Button onClick={addNewSection} variant="contained">
           Add New Section
         </Button>
@@ -315,47 +259,46 @@ const AddForm = () => {
   };
 
   const updateForm = async () => {
-    const res = await fetch(url+'/form/getall', {
-      method: 'PUT',
-      body : JSON.stringify({
-
-      })
+    const res = await fetch(url + "/form/getall", {
+      method: "PUT",
+      body: JSON.stringify({}),
     });
     const data = await res.json();
 
     console.log(res.status);
-    
-  }
+  };
 
   return (
     <div className="col-md-8 mx-auto pt-4 w-100">
-      <button className="btn btn-primary" onClick={updateForm}>Save Form</button>
+      <button className="btn btn-primary" onClick={updateForm}>
+        Save Form
+      </button>
       {/* <div className="container"> */}
-        <Paper square>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant="fullWidth"
-            indicatorColor="secondary"
-            textColor="secondary"
-            aria-label="icon label tabs example"
-          >
-            <Tab icon={<Assignment />} label="Create Your Forms" />
-            <Tab icon={<PersonPin />} label="Setting" />
-            <Tab icon={<PersonPin />} label="Responses" />
-          </Tabs>
-        </Paper>
+      <Paper square>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="fullWidth"
+          indicatorColor="secondary"
+          textColor="secondary"
+          aria-label="icon label tabs example"
+        >
+          <Tab icon={<Assignment />} label="Create Your Forms" />
+          <Tab icon={<PersonPin />} label="Setting" />
+          <Tab icon={<PersonPin />} label="Responses" />
+        </Tabs>
+      </Paper>
 
-        <TabPanel value={value} index={0}>
-          <div className="basic-details">
-            <Formik
-              initialValues={userForm}
-              onSubmit={userSubmit}
-              // validationSchema={formSchema}
-            >
-              {({ handleSubmit, handleChange, values, errors, touched }) => (
-                <form onSubmit={handleSubmit}>
-                  <div className="p-3">
+      <TabPanel value={value} index={0}>
+        <div className="basic-details">
+          <Formik
+            initialValues={userForm}
+            onSubmit={userSubmit}
+            // validationSchema={formSchema}
+          >
+            {({ handleSubmit, handleChange, values, errors, touched }) => (
+              <form onSubmit={handleSubmit}>
+                <div className="p-3">
                   <TextField
                     label="Title"
                     variant="standard"
@@ -366,9 +309,9 @@ const AddForm = () => {
                     // className="form-control form-control-lg"
                     // helperText={touched.username ? errors.username : ''}
                     // error={Boolean(errors.username && touched.username)}
-                  /></div>
-                  <div className="p-3">
-
+                  />
+                </div>
+                <div className="p-3">
                   <TextField
                     label="Description"
                     variant="standard"
@@ -379,29 +322,28 @@ const AddForm = () => {
                     // className="form-control form-control-lg"
                     // helperText={touched.email ? errors.email : ''}
                     // error={Boolean(errors.email && touched.email)}
-                  /></div>
-                  {/* <button type="submit" className="btn btn-warning btn-lg ms-2">
+                  />
+                </div>
+                {/* <button type="submit" className="btn btn-warning btn-lg ms-2">
                     Submit
                   </button> */}
-                </form>
-              )}
-            </Formik>
-          </div>
-          
+              </form>
+            )}
+          </Formik>
+        </div>
 
-          <div className="form-customizer">{renderCourse()}</div>
+        <div className="form-customizer">{renderCourse()}</div>
 
-          {/* <Formik initialValues={courseForm} onSubmit={onFormSubmit}>
+        {/* <Formik initialValues={courseForm} onSubmit={onFormSubmit}>
             {({ values, handleChange, handleSubmit, isSubmitting }) => (
               <form onSubmit={handleSubmit}></form>
             )}
           </Formik> */}
-          
-        </TabPanel>
+      </TabPanel>
 
-        <TabPanel value={value} index={1}>
-          Item Two
-        </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
       {/* </div> */}
     </div>
   );

@@ -16,7 +16,7 @@ const ListForms = () => {
     );
 
     const data = await response.json();
-    console.log(data);
+    console.log("Listforms ****" + data);
     setFormList(data);
     setLoading(false);
   };
@@ -122,7 +122,7 @@ const ListForms = () => {
 
       <button className="btn btn-primary" onClick={createNewForm}>
         {" "}
-        Submit
+         ➕ New
       </button>
     </div>
   );

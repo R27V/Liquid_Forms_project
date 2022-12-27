@@ -30,46 +30,55 @@ const Header = () => {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {/* Link */}
               <li className="nav-item">
-              <img src="logo.jpg" />
+                <img src="logo.jpg" />
               </li>
 
               <li className="nav-item">
-                <NavLink className="nav-link" to="/home">
+                <NavLink className="nav-link" to="/main/home">
                   Home
                 </NavLink>
               </li>
-              
+
               <li className="nav-item">
-                <NavLink className="nav-link" to="/signup">
+                <NavLink className="nav-link" to="/main/signup">
                   Sign Up
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/manageAsset">
+                <NavLink className="nav-link" to="/user/manageAsset">
                   Manage Assets
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/userManager">
+                <NavLink className="nav-link" to="/admin/userManager">
                   User Manager
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/contactInfo">
+                <NavLink className="nav-link" to="/main/contactInfo">
                   Contact Information
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/login">
+                <NavLink className="nav-link" to="/main/login">
                   Add Form
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/listForm">
+                <NavLink className="nav-link" to="/user/listForm">
                   List Form
                 </NavLink>
               </li>
-              
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/user/profile">
+                 Profile
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/admin/updateuser">
+                 Update User
+                </NavLink>
+              </li>
             </ul>
             {/* Icons */}
             <ul className="navbar-nav d-flex flex-row me-1">
@@ -81,17 +90,15 @@ const Header = () => {
                       setLoggedin(false);
                     }}
                   >
-                      
                     <i className="fas fa-sign-out-alt"></i>Logout
                   </button>
                 ) : (
-                  
-                    <NavLink className="btn btn-primary" to="/login">
-                    <i className="fas fa-sign-in"></i> Login</NavLink>
+                  <NavLink className="btn btn-primary" to="/main/login">
+                    <i className="fas fa-sign-in"></i> Login
+                  </NavLink>
                 )}
               </li>
             </ul>
-           
           </div>
         </div>
       </nav>

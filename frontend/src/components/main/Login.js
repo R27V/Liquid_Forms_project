@@ -36,7 +36,7 @@ const Login = () => {
       });
 
       // navigate("/addForm/:formid");
-      navigate("/listForm");
+      navigate("/user/listForm");
     } else if (response.status === 401) {
       Swal.fire({
         icon: "error",
