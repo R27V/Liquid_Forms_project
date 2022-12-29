@@ -65,7 +65,7 @@ const ListForms = () => {
       <div className="col-sm-6 col-md-4">
         <div
           className="card d-flex flex-column align-items-center justify-content-center"
-          style={{ borderRadius: "89px", height: "90%" }}
+          style={{ height: "90%" }}
         >
           <div
             className="card-body"
@@ -73,9 +73,13 @@ const ListForms = () => {
           >
             <h5 className="card-title"></h5>
             <p className="card-text">
-              <Link to={"/editform/new"} className="btn btn-primary">
-                Create Form
-              </Link>
+              <img src="add.png" />
+              <div>
+            <button className="btn btn-primary" onClick={createNewForm}>
+        {" "}
+        Create New+
+      </button>
+      </div>
             </p>
           </div>
         </div>
@@ -87,7 +91,7 @@ const ListForms = () => {
     if (!loading && formList)
       return formList.map((form) => (
         <div className="col-sm-6 col-md-4">
-          <div className="card">
+          <div className="card p-4 mb-4">
             <div className="card-body">
               <h5 className="card-title">{form.title}</h5>
               <p className="card-text">
@@ -106,24 +110,28 @@ const ListForms = () => {
   };
 
   return (
-    <div>
-      <header className="bg-dark">
+    <div  style={{
+      backgroundColor: "white",
+     }}>
+      <header className="bg-info">
         <div className="container py-5">
-          <h1 className="display-1 text-center">Form List</h1>
+          <h1 className="display-2 text-center" 
+          style={{
+         fontFamily : "serif",
+         color : "black"
+      }}
+      >Form Templates</h1>
         </div>
       </header>
 
-      <div className="container">
+      <div className="container m-4">
         <div className="row">
-          {/* {createNewFormBox()} */}
+          {createNewFormBox()}
           {displayTemplates()}
         </div>
       </div>
 
-      <button className="btn btn-primary" onClick={createNewForm}>
-        {" "}
-         ➕ New
-      </button>
+      
     </div>
   );
 };

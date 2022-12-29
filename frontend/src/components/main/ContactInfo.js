@@ -4,7 +4,14 @@ import React from 'react';
 const ContactInfo = () =>{
     return(
         <>
-            <div className="container d-flex align-items-center justify-content-center">
+            <div className="d-flex flex-column align-items-center justify-content-center"
+            style={{
+              boxShadow:
+              "1px 1px 2px 1px rgb(0 0 0 / 10%), -1px -1px 2px 1px rgb(0 0 0 / 10%)",
+            backgroundImage: `url(https://images.unsplash.com/photo-1588421357574-87938a86fa28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80)`,
+            backgroundSize: "cover",
+            height: "100vh",
+            }}>
         <div className="card">
           <div className="card-body">
           <div className='m-4'>

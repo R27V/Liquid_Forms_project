@@ -2,7 +2,7 @@ import React from "react";
 import "./profile.css"
 const Profile = () => {
   return (
-    <div>
+    <div >
       <section className="vh-100" style={{ backgroundColor: "#f4f5f7" }}>
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -40,7 +40,7 @@ const Profile = () => {
                           <p className="text-muted">123 456 789</p>
                         </div>
                       </div>
-                      <h6>Projects</h6>
+                      <h6>My Forms</h6>
                       <hr className="mt-0 mb-4" />
                       <div className="row pt-1">
                         <div className="col-6 mb-3">

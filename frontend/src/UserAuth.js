@@ -10,7 +10,9 @@ const UserAuth = ({children}) => {
         return children;
     }else{
         Swal.fire({
-            icon : 'error'
+            icon : 'error',
+            title : '',
+        text : 'You have to SignUp first😎'
         })
         return <Navigate to="/main/login"/>
     }

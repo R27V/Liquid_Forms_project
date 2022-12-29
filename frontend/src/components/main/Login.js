@@ -51,6 +51,7 @@ const Login = () => {
     <div
       className="d-flex flex-column align-items-center justify-content-center"
       style={{
+        background: "linear-gradient(0deg, red, yellow)",
         backgroundImage: `url(https://wallpaperaccess.com/full/1900932.jpg)`,
         backgroundSize: "cover",
         height: "100vh",
