@@ -94,10 +94,10 @@ const ListForms = () => {
           <div className="card p-4 mb-4">
             <div className="card-body">
               <h5 className="card-title">{form.title}</h5>
-              <p className="card-text">
+              <p className="card-text" data-mdb-toggle="tooltip" title={form.description}>
                 {form.description
-                  ? form.description
-                  : "With supporting text below as a natural lead-in to additional content"}
+                  ? form.description.substring(0, 80)+'...'
+                  : <p className="text-muted">No Description</p>}
               </p>
               <Link to={"/editform/" + form._id} className="btn btn-primary">
                 Edit Form
