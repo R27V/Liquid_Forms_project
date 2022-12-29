@@ -32,8 +32,8 @@ function App() {
           </Route>
 
           <Route element={<Admin />} path="admin">
-            <Route element={<UserManager />} path="admin/usermanager" />
-            <Route element={<UpdateUser />} path="admin/updateuser" />
+            <Route element={<UserManager />} path="usermanager" />
+            <Route element={<UpdateUser />} path="updateuser" />
           </Route>
 
           <Route
