@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import EllipsedLabel from "../common/EllipsedLabel";
 
 const ListForms = () => {
   const [currentUser, setCurrentUser] = useState(
@@ -63,27 +64,34 @@ const ListForms = () => {
   const createNewFormBox = () => {
     return (
       <div className="col-sm-6 col-md-4">
-        <div
-          className="card d-flex flex-column align-items-center justify-content-center"
-          style={{ height: "90%" }}
-        >
           <div
-            className="card-body"
-            style={{ marginTop: "20%", marginLeft: "9%" }}
+            className="card p-4 mb-4"
+            style={{
+              backgroundColor: "#f6f6f6",
+            }}
           >
-            <h5 className="card-title"></h5>
-            <p className="card-text">
-              <img src="add.png" />
-              <div>
-            <button className="btn btn-primary" onClick={createNewForm}>
-        {" "}
-        Create New+
-      </button>
-      </div>
-            </p>
+            <div className="card-body">
+              <h5 className="card-title"></h5>
+              <p className="card-text row d-flex justify-content-center align-items-center">
+              <EllipsedLabel
+                  label={
+                    <div>
+                    <div className="d-flex justify-content-center align-items-center"> <img src="add.png" /></div>
+              <div className="d-flex justify-content-center align-items-center">
+                <button className="btn btn-primary" onClick={createNewForm}>
+                  {" "}
+                  Create New+
+                </button>
+              </div></div>
+                  }
+                  maxLength="20"
+                />
+             
+              </p>
+              
+            </div>
           </div>
         </div>
-      </div>
     );
   };
 
@@ -91,13 +99,23 @@ const ListForms = () => {
     if (!loading && formList)
       return formList.map((form) => (
         <div className="col-sm-6 col-md-4">
-          <div className="card p-4 mb-4">
+          <div
+            className="card p-4 mb-4"
+            style={{
+              backgroundColor: "#f6f6f6",
+            }}
+          >
             <div className="card-body">
               <h5 className="card-title">{form.title}</h5>
               <p className="card-text">
-                {form.description
-                  ? form.description
-                  : "With supporting text below as a natural lead-in to additional content"}
+                <EllipsedLabel
+                  label={
+                    form.description
+                      ? form.description
+                      : "With supporting text below as a natural lead-in to additional content"
+                  }
+                  maxLength="20"
+                />
               </p>
               <Link to={"/editform/" + form._id} className="btn btn-primary">
                 Edit Form
@@ -110,28 +128,43 @@ const ListForms = () => {
   };
 
   return (
-    <div  style={{
-      backgroundColor: "white",
-     }}>
+    <div
+      style={{
+        backgroundColor: "white",
+      }}
+    >
       <header className="bg-info">
         <div className="container py-5">
-          <h1 className="display-2 text-center" 
-          style={{
-         fontFamily : "serif",
-         color : "black"
-      }}
-      >Form Templates</h1>
+          <h1
+            className="display-2 text-center"
+            style={{
+              fontFamily: "serif",
+              color: "black",
+            }}
+          >
+            Form Templates
+            <div className="input-group">
+  <div className="form-outline">
+    <input type="search" id="form1" className="form-control" />
+    <label className="form-label" htmlFor="form1">
+      Search
+    </label>
+  </div>
+  <button type="button" className="btn btn-primary">
+    <i className="fas fa-search" />
+  </button>
+</div>
+
+          </h1>
         </div>
       </header>
 
-      <div className="container m-4">
-        <div className="row">
+      <div className="container m-8 d-flex justify-content-center align-items-center">
+        <div className="row d-flex justify-content-center align-items-center">
           {createNewFormBox()}
           {displayTemplates()}
         </div>
       </div>
-
-      
     </div>
   );
 };
