@@ -107,15 +107,10 @@ const ListForms = () => {
           >
             <div className="card-body">
               <h5 className="card-title">{form.title}</h5>
-              <p className="card-text">
-                <EllipsedLabel
-                  label={
-                    form.description
-                      ? form.description
-                      : "With supporting text below as a natural lead-in to additional content"
-                  }
-                  maxLength="20"
-                />
+              <p className="card-text" data-mdb-toggle="tooltip" title={form.description}>
+                {form.description
+                  ? form.description.substring(0, 80)+'...'
+                  : <p className="text-muted">No Description</p>}
               </p>
               <Link to={"/editform/" + form._id} className="btn btn-primary">
                 Edit Form
