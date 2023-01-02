@@ -37,6 +37,14 @@ const AddForm = () => {
   const { formid } = useParams();
   console.log(formid);
 
+  const [bgImages, setBgImages] = useState([
+    'https://wallpaperaccess.com/full/643353.png',
+    'https://images.unsplash.com/photo-1616088410192-d1b123712994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bWluaW1hbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80',
+    'https://wallpaperaccess.com/full/2906429.jpg'
+  ])
+
+  const [selBgImg, setSelBgImg] = useState(null);
+
   const [tempForm, setTempForm] = useState({});
 
   const [value, setValue] = React.useState(0);
@@ -269,82 +277,88 @@ const AddForm = () => {
   };
 
   return (
-    <div className="col-md-8 mx-auto pt-4 w-100">
-      <button className="btn btn-primary" onClick={updateForm}>
-        Save Form
-      </button>
-      {/* <div className="container"> */}
-      <Paper square>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          indicatorColor="secondary"
-          textColor="secondary"
-          aria-label="icon label tabs example"
-        >
-          <Tab icon={<Assignment />} label="Create Your Forms" />
-          <Tab icon={<PersonPin />} label="Setting" />
-          <Tab icon={<PersonPin />} label="Responses" />
-        </Tabs>
-      </Paper>
-
-      <TabPanel value={value} index={0}>
-        <div className="basic-details">
-          <Formik
-            initialValues={userForm}
-            onSubmit={userSubmit}
-            // validationSchema={formSchema}
+    <div className="vh-100 main-form-bg" style={{backgroundImage: selBgImg?`url('${selBgImg}')`:'white'}}>
+      <div className="col-md-8 mx-auto pt-4">
+        <button className="btn btn-primary" onClick={updateForm}>
+          Save Form
+        </button>
+        {/* <div className="container"> */}
+        <Paper square>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            indicatorColor="secondary"
+            textColor="secondary"
+            aria-label="icon label tabs example"
           >
-            {({ handleSubmit, handleChange, values, errors, touched }) => (
-              <form onSubmit={handleSubmit}>
-                <div className="p-3">
-                  <TextField
-                    label="Title"
-                    variant="standard"
-                    // className="w-50 mb-4"
-                    id="standard-basic"
-                    onChange={handleChange}
-                    // value={values.title}
-                    // className="form-control form-control-lg"
-                    // helperText={touched.username ? errors.username : ''}
-                    // error={Boolean(errors.username && touched.username)}
-                  />
-                </div>
-                <div className="p-3">
-                  <TextField
-                    label="Description"
-                    variant="standard"
-                    // className="w-50 mb-4"
-                    id="standard-basic"
-                    onChange={handleChange}
-                    // value={values.description}
-                    // className="form-control form-control-lg"
-                    // helperText={touched.email ? errors.email : ''}
-                    // error={Boolean(errors.email && touched.email)}
-                  />
-                </div>
-                {/* <button type="submit" className="btn btn-warning btn-lg ms-2">
+            <Tab icon={<Assignment />} label="Create Your Forms" />
+            <Tab icon={<PersonPin />} label="Setting" />
+            <Tab icon={<PersonPin />} label="Responses" />
+          </Tabs>
+        </Paper>
+
+        <TabPanel value={value} index={0}>
+          <div className="basic-details">
+            <Formik
+              initialValues={userForm}
+              onSubmit={userSubmit}
+              // validationSchema={formSchema}
+            >
+              {({ handleSubmit, handleChange, values, errors, touched }) => (
+                <form onSubmit={handleSubmit}>
+                  <div className="p-3">
+                    <TextField
+                      label="Title"
+                      variant="standard"
+                      // className="w-50 mb-4"
+                      id="standard-basic"
+                      onChange={handleChange}
+                      // value={values.title}
+                      // className="form-control form-control-lg"
+                      // helperText={touched.username ? errors.username : ''}
+                      // error={Boolean(errors.username && touched.username)}
+                    />
+                  </div>
+                  <div className="p-3">
+                    <TextField
+                      label="Description"
+                      variant="standard"
+                      // className="w-50 mb-4"
+                      id="standard-basic"
+                      onChange={handleChange}
+                      // value={values.description}
+                      // className="form-control form-control-lg"
+                      // helperText={touched.email ? errors.email : ''}
+                      // error={Boolean(errors.email && touched.email)}
+                    />
+                  </div>
+                  {/* <button type="submit" className="btn btn-warning btn-lg ms-2">
                     Submit
                   </button> */}
-              </form>
-            )}
-          </Formik>
-        </div>
+                </form>
+              )}
+            </Formik>
+          </div>
 
-        <div className="form-customizer">{renderCourse()}</div>
+          <div className="form-customizer">{renderCourse()}</div>
 
-        {/* <Formik initialValues={courseForm} onSubmit={onFormSubmit}>
+          {/* <Formik initialValues={courseForm} onSubmit={onFormSubmit}>
             {({ values, handleChange, handleSubmit, isSubmitting }) => (
               <form onSubmit={handleSubmit}></form>
             )}
           </Formik> */}
-      </TabPanel>
+        </TabPanel>
 
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      {/* </div> */}
+        <TabPanel value={value} index={1}>
+          <select className="form-control" onChange={e => setSelBgImg(e.target.value)}>
+            {bgImages.map((img, i) => (
+              <option value={img} key={i}>{img}</option>
+            ))}
+          </select>
+        </TabPanel>
+        {/* </div> */}
+      </div>
     </div>
   );
 };

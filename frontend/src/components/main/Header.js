@@ -12,7 +12,7 @@ const Header = () => {
         style={{ backgroundColor: "#232a69" }}
       >
         {/* Container wrapper */}
-        <div>
+        <div className="container">
           {/* Toggle button */}
           <button
             className="navbar-toggler"
@@ -71,12 +71,12 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/user/profile">
-                 Profile
+                  Profile
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/admin/updateuser">
-                 Update User
+                  Update User
                 </NavLink>
               </li>
             </ul>

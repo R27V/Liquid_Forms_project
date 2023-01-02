@@ -112,7 +112,7 @@ const ListForms = () => {
                   ? form.description.substring(0, 80)+'...'
                   : <p className="text-muted">No Description</p>}
               </p>
-              <Link to={"/editform/" + form._id} className="btn btn-primary">
+              <Link to={"/user/editform/" + form._id} className="btn btn-primary">
                 Edit Form
               </Link>
             </div>
