@@ -294,9 +294,6 @@ const AddForm = () => {
       }}
     >
       <div className="col-md-8 mx-auto pt-4">
-        <button className="btn btn-primary" onClick={updateForm}>
-          Save Form
-        </button>
         {/* <div className="container"> */}
         <Paper square>
           <Tabs
@@ -326,11 +323,11 @@ const AddForm = () => {
                     <TextField
                       label="Title"
                       variant="standard"
-                      className="w-50 mb-4"
+                      className="form-control form-control-lg w-50 mb-4"
                       id="standard-basic"
                       onChange={handleChange}
                       // value={values.title}
-                      className="form-control form-control-lg"
+
                       // helperText={touched.username ? errors.username : ''}
                       // error={Boolean(errors.username && touched.username)}
                     />
@@ -339,11 +336,11 @@ const AddForm = () => {
                     <TextField
                       label="Description"
                       variant="standard"
-                      className="w-50 mb-4"
+                      className="form-control form-control-lg w-50 mb-4"
                       id="standard-basic"
                       onChange={handleChange}
                       // value={values.description}
-                      className="form-control form-control-lg"
+
                       // helperText={touched.email ? errors.email : ''}
                       // error={Boolean(errors.email && touched.email)}
                     />
@@ -391,6 +388,9 @@ const AddForm = () => {
           </select>
         </TabPanel>
         {/* </div> */}
+        <button className="btn btn-primary" onClick={updateForm}>
+          Save Form
+        </button>
       </div>
     </div>
   );

@@ -38,14 +38,14 @@ import React from "react";
               <button className="btn btn-secondary btn-lg">
                 <a href=".pdf" style={{ color: "white" }}>
                   {" "}
-                  Download CV
+                  Download 
                 </a>{" "}
               </button>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
               <button className="btn btn-secondary btn-lg">
-                <a href="contactMe.html" style={{ color: "white" }}>
+                {/* <a href="contactMe.html" style={{ color: "white" }}>
                   Contact Me
-                </a>
+                </a> */}
               </button>
             </p>
           </div>
@@ -53,7 +53,7 @@ import React from "react";
       </div>
       <div className="col-md h-1500 d-flex flex-column align-items-start justify-content-center">
         <div className="text">
-          <img src="selfie.jpg" alt="" height="450px" width="350px" />
+          {/* <img src="selfie.jpg" alt="" height="450px" width="350px" /> */}
         </div>
       </div>
     </div>
