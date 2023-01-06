@@ -74,51 +74,27 @@ const AddForm = () => {
     console.log(formdata);
   };
 
-  const addNewSection = () => {
-    const newSection = {
-      name: "Untitled Section",
-      description: "Section Description",
-      questions: [
-        {
-          name: "question 1",
-          description: "question 1 Description",
-          content: "",
-          resources: [],
-        },
-      ],
-    };
-    <div class="form-outline">
-      <input type="text" id="form12" class="form-control" />
-      <label class="form-label" for="form12">
-        question 1
-      </label>
-    </div>;
-
-    const newData = update(formData, {
-      sections: {
-        $push: [newSection],
-      },
-    });
-
-    setFormData(newData);
-  };
 
   const addNewQuestion = (ques_index) => {
+    console.log(formData);
+    // return;
     const newQuestion = {
       name: "Untitled question",
-      description: "question Description",
-      content: "",
-      resources: [],
+      answer: "",
+      mark: "",
+      options: [],
     };
 
-    const questions = {};
-    questions[ques_index] = { questions: { $push: [newQuestion] } };
+    setFormData([...formData, newQuestion])
 
-    const newData = update(formData, {
-      questions: questions,
-    });
+    // const questions = {};
+    // formData[ques_index] = { questions: { $push: [newQuestion] } };
 
-    setFormData(newData);
+    // const newData = update(formData, {
+    //   questions: questions,
+    // });
+
+    // setFormData(newData);
   };
 
   const handleRename = (prop, val, sect_i, ques_i) => {
@@ -191,7 +167,7 @@ const AddForm = () => {
     const dbFormData = await response.json();
     console.log(dbFormData);
 
-    setFormData(dbFormData.data);
+    setFormData(dbFormData.data.questions);
     setFormLoaded(true);
   };
 
@@ -211,19 +187,22 @@ const AddForm = () => {
     return (
       <div className="">
         {formLoaded
-          ? formData.questions.map((question, ques_i) => (
+          ? formData.map((question, ques_i) => (
               <div className="card">
                 <div className="form-section" key={ques_i}>
-                  <h3>
-                    Section {`${ques_i + 1}: `}
-                    <InputBase
-                      className="section-input"
+                  <div className="input-group">
+                    <span className="input-group-text">
+                      Section {`${ques_i + 1}: `}
+                    </span>
+                    <input
                       value={question.name}
                       onChange={(e) =>
                         handleRename("ques_name", e.target.value, ques_i, 0)
                       }
-                    ></InputBase>
-                  </h3>
+                      type="text"
+                      className="form-control"
+                    />
+                  </div>
 
                   <Button
                     onClick={(e) => addNewQuestion(ques_i)}
@@ -235,9 +214,6 @@ const AddForm = () => {
               </div>
             ))
           : "Form Loading"}
-        <Button onClick={addNewSection} variant="contained">
-          Add New Section
-        </Button>
 
         {/* <Button className="w-100 mt-5" onClick={createCourse}>
           Create Course

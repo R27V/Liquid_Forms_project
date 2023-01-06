@@ -18,7 +18,7 @@ import ResponseManage from "./components/user/ResponseManage";
 import UpdateUser from "./components/admin/UpdateUser";
 import UserAuth from "./UserAuth";
 import { Dashboard } from "@mui/icons-material";
-
+import AdminAuth from "./AdminAuth";
 
 function App() {
   return (
@@ -34,11 +34,17 @@ function App() {
             <Route element={<ContactInfo />} path="contactInfo" />
           </Route>
 
-          <Route element={<Admin />} path="admin">
+          <Route
+            element={
+              <AdminAuth>
+                <Admin />
+              </AdminAuth>
+            }
+            path="admin"
+          >
             <Route element={<UserManager />} path="usermanager" />
             <Route element={<UpdateUser />} path="updateuser" />
             <Route element={<Dashboard />} path="dashboard" />
-
           </Route>
 
           <Route
@@ -54,7 +60,6 @@ function App() {
             <Route element={<ListForms />} path="listForm" />
             <Route element={<Profile />} path="profile" />
             <Route element={<ResponseManage />} path="responseManage" />
-
           </Route>
         </Routes>
       </BrowserRouter>

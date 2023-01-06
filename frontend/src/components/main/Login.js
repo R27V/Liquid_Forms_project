@@ -28,15 +28,20 @@ const Login = () => {
       console.log("request sent");
       resetForm();
       const data = await response.json();
-      sessionStorage.setItem("user", JSON.stringify(data));
+      if(data.isAdmin){
+        sessionStorage.setItem("admin", JSON.stringify(data));
+        navigate("/admin/usermanager");
+      }
+      else{
+        sessionStorage.setItem("user", JSON.stringify(data));
+        navigate("/user/listForm");
+      }
       Swal.fire({
         icon: "success",
         title: "Success",
         text: "Loggedin Successfully",
       });
-
       // navigate("/addForm/:formid");
-      navigate("/user/listForm");
     } else if (response.status === 401) {
       Swal.fire({
         icon: "error",
