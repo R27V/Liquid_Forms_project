@@ -19,6 +19,7 @@ import UpdateUser from "./components/admin/UpdateUser";
 import UserAuth from "./UserAuth";
 import { Dashboard } from "@mui/icons-material";
 import AdminAuth from "./AdminAuth";
+import ResetPassword from "./components/main/ResetPassword";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route element={<Login />} path="login" />
             <Route element={<Signup />} path="signup" />
             <Route element={<ContactInfo />} path="contactInfo" />
+            <Route element={<ResetPassword />} path="resetpassword" />
           </Route>
 
           <Route
