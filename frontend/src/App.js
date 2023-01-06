@@ -14,8 +14,10 @@ import ContactInfo from "./components/main/ContactInfo";
 import Admin from "./components/admin";
 import User from "./components/user";
 import Profile from "./components/user/Profile";
+import ResponseManage from "./components/user/ResponseManage";
 import UpdateUser from "./components/admin/UpdateUser";
 import UserAuth from "./UserAuth";
+import { Dashboard } from "@mui/icons-material";
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
           <Route element={<Admin />} path="admin">
             <Route element={<UserManager />} path="usermanager" />
             <Route element={<UpdateUser />} path="updateuser" />
+            <Route element={<Dashboard />} path="dashboard" />
+
           </Route>
 
           <Route
@@ -49,6 +53,8 @@ function App() {
             <Route element={<AddForm />} path="editform/:formid" />
             <Route element={<ListForms />} path="listForm" />
             <Route element={<Profile />} path="profile" />
+            <Route element={<ResponseManage />} path="responseManage" />
+
           </Route>
         </Routes>
       </BrowserRouter>

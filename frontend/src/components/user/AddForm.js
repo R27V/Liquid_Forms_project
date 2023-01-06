@@ -38,12 +38,21 @@ const AddForm = () => {
   console.log(formid);
 
   const [bgImages, setBgImages] = useState([
-    'https://wallpaperaccess.com/full/643353.png',
-    'https://images.unsplash.com/photo-1616088410192-d1b123712994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bWluaW1hbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80',
-    'https://wallpaperaccess.com/full/2906429.jpg'
-  ])
+    "https://wallpaperaccess.com/full/643353.png",
+    "https://images.unsplash.com/photo-1616088410192-d1b123712994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bWluaW1hbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80",
+    "https://wallpaperaccess.com/full/2906429.jpg",
+    "https://images.wallpapersden.com/image/download/minimal-hd-landscape_bWhsZ2WUmZqaraWkpJRmbmdlrWZlbWU.jpg",
+    "https://wallpapercave.com/wp/wp2733308.jpg",
+    "https://c4.wallpaperflare.com/wallpaper/150/795/765/beautiful-blue-water-green-nature-blue-and-green-picture-of-nature-wallpaper-preview.jpg",
+    "https://wallpaperaccess.com/full/7445.jpg",
+    "https://wallpaperaccess.com/full/2722030.jpg",
+  ]);
 
   const [selBgImg, setSelBgImg] = useState(null);
+
+  const [bgColor, setbgColor] = useState(["red", "yellow", "blue", "green"]);
+
+  const [selBgColor, setSelBgColor] = useState(null);
 
   const [tempForm, setTempForm] = useState({});
 
@@ -277,7 +286,13 @@ const AddForm = () => {
   };
 
   return (
-    <div className="vh-100 main-form-bg" style={{backgroundImage: selBgImg?`url('${selBgImg}')`:'white'}}>
+    <div
+      className="vh-100 main-form-bg"
+      style={{
+        backgroundImage: selBgImg ? `url('${selBgImg}')` : "white",
+        backgroundColor: selBgColor ? `${selBgColor}` : "white",
+      }}
+    >
       <div className="col-md-8 mx-auto pt-4">
         <button className="btn btn-primary" onClick={updateForm}>
           Save Form
@@ -311,11 +326,11 @@ const AddForm = () => {
                     <TextField
                       label="Title"
                       variant="standard"
-                      // className="w-50 mb-4"
+                      className="w-50 mb-4"
                       id="standard-basic"
                       onChange={handleChange}
                       // value={values.title}
-                      // className="form-control form-control-lg"
+                      className="form-control form-control-lg"
                       // helperText={touched.username ? errors.username : ''}
                       // error={Boolean(errors.username && touched.username)}
                     />
@@ -324,11 +339,11 @@ const AddForm = () => {
                     <TextField
                       label="Description"
                       variant="standard"
-                      // className="w-50 mb-4"
+                      className="w-50 mb-4"
                       id="standard-basic"
                       onChange={handleChange}
                       // value={values.description}
-                      // className="form-control form-control-lg"
+                      className="form-control form-control-lg"
                       // helperText={touched.email ? errors.email : ''}
                       // error={Boolean(errors.email && touched.email)}
                     />
@@ -351,9 +366,27 @@ const AddForm = () => {
         </TabPanel>
 
         <TabPanel value={value} index={1}>
-          <select className="form-control" onChange={e => setSelBgImg(e.target.value)}>
+          <select
+            className="form-control"
+            onChange={(e) => setSelBgImg(e.target.value)}
+          >
             {bgImages.map((img, i) => (
-              <option value={img} key={i}>{img}</option>
+              <option value={img} key={i}>
+                {img}
+              </option>
+            ))}
+          </select>
+        </TabPanel>
+
+        <TabPanel value={value} index={1}>
+          <select
+            className="form-control"
+            onChange={(e) => setSelBgColor(e.target.value)}
+          >
+            {bgColor.map((color, i) => (
+              <option value={color} key={i}>
+                {color}
+              </option>
             ))}
           </select>
         </TabPanel>

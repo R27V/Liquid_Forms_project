@@ -12,7 +12,8 @@ const Header = () => {
         style={{ backgroundColor: "#232a69" }}
       >
         {/* Container wrapper */}
-        <div>
+        <div className="container">
+        
           {/* Toggle button */}
           <button
             className="navbar-toggler"
@@ -33,7 +34,7 @@ const Header = () => {
                 <img src="logo.jpg" />
               </li>
 
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/main/home">
                   Home
                 </NavLink>
@@ -48,13 +49,13 @@ const Header = () => {
                 <NavLink className="nav-link" to="/user/manageAsset">
                   Manage Assets
                 </NavLink>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <NavLink className="nav-link" to="/admin/userManager">
                   User Manager
                 </NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/main/contactInfo">
                   Contact Information
                 </NavLink>
@@ -73,10 +74,15 @@ const Header = () => {
                 <NavLink className="nav-link" to="/user/profile">
                  Profile
                 </NavLink>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <NavLink className="nav-link" to="/admin/updateuser">
                  Update User
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/admin/dashboard">
+                 Dashboard
                 </NavLink>
               </li>
             </ul>

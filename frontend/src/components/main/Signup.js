@@ -37,7 +37,7 @@ const Signup = () => {
         text: "User Signed_up!!",
       });
 
-      navigate("/login");
+      navigate("/main/login");
     } else {
       console.log("some error occured");
       Swal.fire({

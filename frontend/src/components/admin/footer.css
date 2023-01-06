@@ -9,7 +9,7 @@
     padding-left: 0;
   }
   footer {
-    background-color: rgb(121, 118, 118);
+    background-color: rgb(35, 42, 105);
     color: #bbb;
     line-height: 1.5;
   }
@@ -91,7 +91,7 @@
   /* Footer legal */
   .ft-legal {
     padding: 0.9375rem 1.875rem;
-    background-color: #333;
+    background-color: rgb(73 80 143 / 55%);
   }
   .ft-legal-list {
     width: 100%;

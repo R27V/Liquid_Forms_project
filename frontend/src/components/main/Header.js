@@ -44,16 +44,16 @@ const Header = () => {
                   Sign Up
                 </NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/user/manageAsset">
                   Manage Assets
                 </NavLink>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/admin/userManager">
                   User Manager
                 </NavLink>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <NavLink className="nav-link" to="/main/contactInfo">
                   Contact Information
@@ -64,7 +64,7 @@ const Header = () => {
                   Add Form
                 </NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/user/listForm">
                   List Form
                 </NavLink>
@@ -77,6 +77,11 @@ const Header = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/admin/updateuser">
                   Update User
+                </NavLink>
+              </li> */}
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/main/preview">
+                  Preview
                 </NavLink>
               </li>
             </ul>
