@@ -30,7 +30,7 @@ const Header = () => {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {/* Link */}
               <li className="nav-item">
-                <img src="logo.jpg" />
+                <img src="logo1.png" style={{ height: "40px" }}/>
               </li>
 
               <li className="nav-item">
@@ -62,6 +62,11 @@ const Header = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/main/login">
                   Add Form
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/main/home2">
+                  Home2
                 </NavLink>
               </li>
               {/* <li className="nav-item">

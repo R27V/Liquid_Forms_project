@@ -8,6 +8,7 @@ import ListForms from "./components/user/ListForms";
 import Footer from "./components/main/Footer";
 import Main from "./components/main";
 import Home from "./components/main/Home";
+import Home2 from "./components/main/Home2";
 import Login from "./components/main/Login";
 import Signup from "./components/main/Signup";
 import ContactInfo from "./components/main/ContactInfo";
@@ -34,6 +35,8 @@ function App() {
             <Route element={<Signup />} path="signup" />
             <Route element={<ContactInfo />} path="contactInfo" />
             <Route element={<ResetPassword />} path="resetpassword" />
+            <Route element={<Home2 />} path="home2" />
+
           </Route>
 
           <Route
