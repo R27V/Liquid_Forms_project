@@ -2,6 +2,7 @@ import { ExpandMore } from "@mui/icons-material";
 import { Assignment } from "@mui/icons-material";
 import { PersonPin } from "@mui/icons-material";
 import update from "immutability-helper";
+import "./updateForms.css";
 
 import {
   Accordion,
@@ -34,6 +35,15 @@ const AddForm = () => {
 
   const answerTypes = ["smalltext", "longtext", "checkbox", "radio", "file"];
 
+  const formObj = {
+    answer: "",
+    correct: "",
+    mark: 0,
+    name: "",
+    options: [],
+    type: "",
+  };
+
   const { formid } = useParams();
   console.log(formid);
 
@@ -52,7 +62,7 @@ const AddForm = () => {
 
   const [bgColor, setbgColor] = useState(["red", "yellow", "blue", "green"]);
 
-  const [selBgColor, setSelBgColor] = useState(null);
+  const [selBgColor, setSelBgColor] = useState("#f3b0ff");
 
   const [tempForm, setTempForm] = useState({});
 
@@ -74,10 +84,12 @@ const AddForm = () => {
     console.log(formdata);
   };
 
-
   const addNewQuestion = (ques_index) => {
+    if (!ques_index) {
+      setFormData([...formData, formObj]);
+      return;
+    }
     console.log(formData);
-    // return;
     const newQuestion = {
       name: "Untitled question",
       answer: "",
@@ -85,16 +97,7 @@ const AddForm = () => {
       options: [],
     };
 
-    setFormData([...formData, newQuestion])
-
-    // const questions = {};
-    // formData[ques_index] = { questions: { $push: [newQuestion] } };
-
-    // const newData = update(formData, {
-    //   questions: questions,
-    // });
-
-    // setFormData(newData);
+    setFormData([...formData, newQuestion]);
   };
 
   const handleRename = (prop, val, sect_i, ques_i) => {
@@ -156,11 +159,6 @@ const AddForm = () => {
     };
   };
 
-  // const showThumb = () => {
-  //   if (imgPath) {
-  //     return <img src={imgPath} className="img-fluid" />;
-  //   }
-  // };
 
   const getformById = async () => {
     const response = await fetch(url + "/form/getbyid/" + formid);
@@ -178,48 +176,35 @@ const AddForm = () => {
     getformById();
   }, []);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    alert(event);
-  };
 
   const renderCourse = () => {
-    return (
-      <div className="">
-        {formLoaded
-          ? formData.map((question, ques_i) => (
-              <div className="card">
-                <div className="form-section" key={ques_i}>
-                  <div className="input-group">
-                    <span className="input-group-text">
-                      Section {`${ques_i + 1}: `}
-                    </span>
-                    <input
-                      value={question.name}
-                      onChange={(e) =>
-                        handleRename("ques_name", e.target.value, ques_i, 0)
-                      }
-                      type="text"
-                      className="form-control"
-                    />
-                  </div>
-
-                  <Button
-                    onClick={(e) => addNewQuestion(ques_i)}
-                    variant="outlined"
-                  >
-                    ADD NEW QUESTION
-                  </Button>
-                </div>
+    return formLoaded
+      ? formData.map((question, ques_i) => (
+          <div className="card question-card mb-4" key={ques_i}>
+            <div className="card-body">
+              <div className="row">
+                <TextField
+                  label="Question"
+                  fullWidth
+                  variant="outlined"
+                  value={question.name}
+                  onChange={(e) =>
+                    handleRename("ques_name", e.target.value, ques_i, 0)
+                  }
+                />
               </div>
-            ))
-          : "Form Loading"}
-
-        {/* <Button className="w-100 mt-5" onClick={createCourse}>
-          Create Course
-        </Button> */}
-      </div>
-    );
+            </div>
+            <div className="card-footer d-flex flex-row-reverse bg-light">
+              <Button variant="outlined" className="ms-3">
+                <i class="fas fa-copy"></i>
+              </Button>
+              <Button variant="outlined" color="error">
+                <i class="fas fa-trash    "></i>
+              </Button>
+            </div>
+          </div>
+        ))
+      : "Form Loading";
   };
 
   const userForm = {
@@ -227,28 +212,6 @@ const AddForm = () => {
     description: "",
     createdBy: currentUser._id,
     createdAt: new Date(),
-  };
-
-  // 2. Create a function for form submission
-  const userSubmit = (formdata) => {
-    console.log(formdata);
-    return;
-    fetch("http://localhost:5000/form/add", {
-      method: "POST",
-      body: JSON.stringify(formdata), //convert javascript to json
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        console.log("data saved");
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Form Created Successfully!!👍",
-        });
-      }
-    });
   };
 
   const updateForm = async () => {
@@ -263,7 +226,7 @@ const AddForm = () => {
 
   return (
     <div
-      className="vh-100 main-form-bg"
+      className="main-form main-form-bg"
       style={{
         backgroundImage: selBgImg ? `url('${selBgImg}')` : "white",
         backgroundColor: selBgColor ? `${selBgColor}` : "white",
@@ -274,68 +237,58 @@ const AddForm = () => {
         <Paper square>
           <Tabs
             value={value}
-            onChange={handleChange}
+            onChange={(e, v) => setValue(v)}
             variant="fullWidth"
             indicatorColor="secondary"
             textColor="secondary"
             aria-label="icon label tabs example"
           >
-            <Tab icon={<Assignment />} label="Create Your Forms" />
+            <Tab icon={<Assignment />} label="Edit Form" />
             <Tab icon={<PersonPin />} label="Setting" />
             <Tab icon={<PersonPin />} label="Responses" />
           </Tabs>
         </Paper>
 
-        <TabPanel value={value} index={0}>
+        <TabPanel value={value} index={0} style={{ backgroundColor: "red" }}>
           <div className="basic-details">
             <Formik
               initialValues={userForm}
-              onSubmit={userSubmit}
+              onSubmit={(formdata) => console.log(formdata)}
               // validationSchema={formSchema}
             >
               {({ handleSubmit, handleChange, values, errors, touched }) => (
                 <form onSubmit={handleSubmit}>
-                  <div className="p-3">
-                    <TextField
-                      label="Title"
-                      variant="standard"
-                      className="form-control form-control-lg w-50 mb-4"
-                      id="standard-basic"
-                      onChange={handleChange}
-                      // value={values.title}
-
-                      // helperText={touched.username ? errors.username : ''}
-                      // error={Boolean(errors.username && touched.username)}
-                    />
-                  </div>
-                  <div className="p-3">
-                    <TextField
-                      label="Description"
-                      variant="standard"
-                      className="form-control form-control-lg w-50 mb-4"
-                      id="standard-basic"
-                      onChange={handleChange}
-                      // value={values.description}
-
-                      // helperText={touched.email ? errors.email : ''}
-                      // error={Boolean(errors.email && touched.email)}
-                    />
-                  </div>
-                  {/* <button type="submit" className="btn btn-warning btn-lg ms-2">
-                    Submit
-                  </button> */}
+                  <TextField
+                    fullWidth
+                    label="Title"
+                    variant="outlined"
+                    className="form-control form-control-lg mb-4"
+                    id="standard-basic"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={3}
+                    label="Description"
+                    variant="outlined"
+                    className="form-control form-control-lg mb-4"
+                    id="standard-basic"
+                    onChange={handleChange}
+                  />
                 </form>
               )}
             </Formik>
           </div>
-
+          <hr />
           <div className="form-customizer">{renderCourse()}</div>
-
-          {/* <Formik initialValues={courseForm} onSubmit={onFormSubmit}>
-            {({ values, handleChange, handleSubmit, isSubmitting }) => (
-              <form onSubmit={handleSubmit}></form>
-            )}
-          </Formik> */}
+          <Button
+            sx={{ mt: 3, mb: 2 }}
+            onClick={(e) => addNewQuestion()}
+            variant="outlined"
+          >
+            <i class="fas fa-plus    "></i>
+          </Button>
         </TabPanel>
 
         <TabPanel value={value} index={1}>
