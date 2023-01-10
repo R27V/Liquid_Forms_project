@@ -2,7 +2,7 @@ const express = require("express");
 const userRouter = require("./routers/userRouter");
 const assetRouter = require("./routers/assetRouter");
 const formRouter = require("./routers/formRouter");
-const utilRouter = require("./routers/util");
+// const utilRouter = require("./routers/util");
 const cors = require("cors");
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(
 app.use("/user", userRouter);
 app.use("/asset", assetRouter);
 app.use("/form", formRouter);
-app.use("/util", utilRouter);
+// app.use("/util", utilRouter);
 
 app.get("/", (req, res) => {
   res.send("Response from Express");
