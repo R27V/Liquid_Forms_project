@@ -1,67 +1,47 @@
-// const multer = require("multer");
-// const router = require("express").Router();
-// const { SMTPClient } = require("emailjs");
+const multer = require("multer");
+const router = require("express").Router();
+const nodemailer = require("nodemailer");
 
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "./uploads");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.originalname);
-//   },
-// });
+let mailTransporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "renuprojects27@gmail.com",
+    pass: "ptqaqzovhwvmpxpc",
+  },
+  port: 465,
+  host: "smtp.gmail.com",
+});
 
-// const myStorage = multer({ storage: storage });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-// router.post("/uploadfile", myStorage.single("myfile"), (req, res) => {
-//   res.status(200).json({ status: "success" });
-// });
+const myStorage = multer({ storage: storage });
 
-// const initMail = () => {
-//   return new SMTPClient({
-//     user: "srivastavashikhar592@gmail.com",
-//     password: "klwvqnkzwycddgkj",
-//     host: "smtp.gmail.com",
-//     ssl: true,
-//   });
-// };
+router.post("/uploadfile", myStorage.single("myfile"), (req, res) => {
+  res.status(200).json({ status: "success" });
+});
 
-// const client = initMail();
-// const sendMail = (to, subject, text) => {
-//   client.send(
-//     {
-//       text: text,
-//       from: "srivastavashikhar592@gmail.com",
-//       to: to,
+router.post("/sendmail", (req, res) => {
+  const { to, subject, html } = req.body;
+  let mailData = {
+    from: "renuprojects27@gmail.com",
+    to: to,
+    subject: subject,
+    html: html,
+  };
 
-//       cc: "",
-//       subject: subject,
-//     },
-//     (err, message) => {
-//       console.log(err || message);
-//     }
-//   );
-// };
+  mailTransporter.sendMail(mailData, (err) => {
+    if (err) {
+      return console.log("Error Occurs", err);
+    }
+    res.status.send({ message: "Mail Send" });
+  });
+});
 
-// router.post("/sendmail", (req, res) => {
-//   const data = req.body;
-//   sendMail(data.to, data.subject, data.text);
-//   res.status(200).json({ message: "mail sent successfully" });
-// });
-
-// router.post("/", (req, res) => {
-//   console.log(req.body);
-
-//   new Model(req.body)
-//     .save()
-//     .then((data) => {
-//       console.log("Email Sent successfully..");
-//       res.status(200).json(data);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.status(500).json(err);
-//     });
-// });
-
-// module.exports = { router };
+module.exports = router;

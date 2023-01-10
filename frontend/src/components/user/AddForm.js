@@ -78,6 +78,8 @@ const AddForm = () => {
     JSON.parse(sessionStorage.getItem("user"))
   );
 
+  const [formDetails, setFormDetails] = useState(null);
+
   const onFormSubmit = (formdata) => {
     console.log("click on button to submit form");
     setTempForm(formdata);
@@ -159,13 +161,13 @@ const AddForm = () => {
     };
   };
 
-
   const getformById = async () => {
     const response = await fetch(url + "/form/getbyid/" + formid);
     const dbFormData = await response.json();
     console.log(dbFormData);
 
     setFormData(dbFormData.data.questions);
+    setFormDetails(dbFormData);
     setFormLoaded(true);
   };
 
@@ -175,7 +177,6 @@ const AddForm = () => {
     console.log(dataReady);
     getformById();
   }, []);
-
 
   const renderCourse = () => {
     return formLoaded
@@ -215,13 +216,20 @@ const AddForm = () => {
   };
 
   const updateForm = async () => {
-    const res = await fetch(url + "/form/getall", {
+    let tempData = formDetails;
+    tempData.data.questions = formData;
+    console.log(tempData);
+    const res = await fetch(url + "/form/update/" + formDetails._id, {
       method: "PUT",
-      body: JSON.stringify({}),
+      body: JSON.stringify(tempData),
+      headers: {
+        "Content-Type": "application/json",
+      }
     });
-    const data = await res.json();
-
     console.log(res.status);
+    const data = await res.json();
+    console.log(data);
+    //success alert
   };
 
   return (
@@ -287,7 +295,7 @@ const AddForm = () => {
             onClick={(e) => addNewQuestion()}
             variant="outlined"
           >
-            <i class="fas fa-plus    "></i>
+            <i class="fas fa-plus"></i>
           </Button>
         </TabPanel>
 

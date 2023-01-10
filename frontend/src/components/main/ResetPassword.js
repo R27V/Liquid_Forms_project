@@ -47,7 +47,7 @@ import {
         body: JSON.stringify({
           to: email,
           subject: "Password Reset",
-          text: "This is your OTP for password reset " + generateOTP(),
+          html: "This is your OTP for password reset " + generateOTP(),
         }),
         headers: {
           "Content-Type": "application/json",
