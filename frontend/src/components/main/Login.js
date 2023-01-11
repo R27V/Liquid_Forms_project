@@ -115,10 +115,15 @@ const Login = () => {
                       </a>
                     </div>
                   </div>
-                  <div>
-                    <Button type="submit" variant="contained">
+                   <div className="row">
+                    <div className="col-md"> <Button type="submit" variant="contained">
                       Submit
                     </Button>
+                    </div>
+                    <div className="col-md">
+                     Create account
+                    </div>
+                    
                   </div>
                 </form>
               )}

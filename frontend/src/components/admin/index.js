@@ -7,6 +7,7 @@ const Admin = () => {
     return (
         <div>
              <Header/>
+             
       <Outlet/>
       <Footer/>
         </div>

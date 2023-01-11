@@ -72,6 +72,10 @@ const AddForm = () => {
   const [dataReady, setDataReady] = React.useState(false);
   const [formLoaded, setFormLoaded] = useState(false);
 
+  const [isQuiz, setIsQuiz] = useState(false);
+  const [limitOneResponse, setLimitOneResponse] = useState(false);
+  const [confirmationMsg, setConfirmationMsg] = useState();
+
   const [imgPath, setImgPath] = useState("");
   const [avatar, setAvatar] = useState("");
   const [currentUser, setCurrentUser] = useState(

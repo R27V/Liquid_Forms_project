@@ -1,11 +1,11 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Header from "./components/admin/Header";
+// import Header from "./components/admin/Header";
 import ManageAssets from "./components/user/ManageAssets";
 import UserManager from "./components/admin/UserManager";
 import AddForm from "./components/user/AddForm";
 import ListForms from "./components/user/ListForms";
-import Footer from "./components/main/Footer";
+// import Footer from "./components/main/Footer";
 import Main from "./components/main";
 import Home from "./components/main/Home";
 import Home2 from "./components/main/Home2";
@@ -18,9 +18,12 @@ import Profile from "./components/user/Profile";
 import ResponseManage from "./components/user/ResponseManage";
 import UpdateUser from "./components/admin/UpdateUser";
 import UserAuth from "./UserAuth";
-import { Dashboard } from "@mui/icons-material";
+import Dashboard from "./components/admin/Dashboard";
 import AdminAuth from "./AdminAuth";
 import ResetPassword from "./components/main/ResetPassword";
+import HeaderDashboard from "./components/admin/HeaderDashboard";
+import MenuDashboard from "./components/admin/MenuDashboard";
+import Dash from "./components/admin/Dash";
 
 function App() {
   return (
@@ -36,7 +39,6 @@ function App() {
             <Route element={<ContactInfo />} path="contactInfo" />
             <Route element={<ResetPassword />} path="resetpassword" />
             <Route element={<Home2 />} path="home2" />
-
           </Route>
 
           <Route
@@ -50,6 +52,9 @@ function App() {
             <Route element={<UserManager />} path="usermanager" />
             <Route element={<UpdateUser />} path="updateuser" />
             <Route element={<Dashboard />} path="dashboard" />
+            <Route element={<HeaderDashboard />} path="headerDashboard" />
+            <Route element={<MenuDashboard />} path="MenuDashboard" />
+            <Route element={<Dash />} path="dash" />
           </Route>
 
           <Route
