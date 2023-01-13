@@ -106,17 +106,26 @@ const AddForm = () => {
     setFormData([...formData, newQuestion]);
   };
 
-  const handleRename = (prop, val, sect_i, ques_i) => {
-    const questions = {};
-    if (prop === "ques_name") {
-      questions[ques_i] = { name: { $set: val } };
-    }
+  const handleRename = (prop, val, ques_i) => {
+    // console.log(formData);
+    let temp = formData[ques_i];
+    temp[prop] = val;
+    setFormData([
+      ...formData.slice(0, ques_i),
+      temp,
+      ...formData.slice(ques_i + 1),
+    ]);
+    // return;
+    // const questions = {};
+    // if (prop === "ques_name") {
+    //   questions[ques_i] = { name: { $set: val } };
+    // }
 
-    const newData = update(formData, {
-      questions: questions,
-    });
+    // const newData = update(formData, {
+    //   questions: questions,
+    // });
 
-    setFormData(newData);
+    // setFormData(newData);
   };
 
   const handleFileUpload = (prop, file, sect_i, ques_i) => {
@@ -182,22 +191,30 @@ const AddForm = () => {
     getformById();
   }, []);
 
+  const renderAnswerBox = () => {
+    
+  }
+
   const renderCourse = () => {
     return formLoaded
       ? formData.map((question, ques_i) => (
           <div className="card question-card mb-4" key={ques_i}>
             <div className="card-body">
-              <div className="row">
-                <TextField
-                  label="Question"
-                  fullWidth
-                  variant="outlined"
-                  value={question.name}
-                  onChange={(e) =>
-                    handleRename("ques_name", e.target.value, ques_i, 0)
-                  }
-                />
-              </div>
+              <TextField
+                label="Question"
+                fullWidth
+                variant="outlined"
+                value={question.name}
+                onChange={(e) =>
+                  handleRename("ques_name", e.target.value, ques_i)
+                }
+              />
+              <select className="form-control w-25 my-2">
+                {answerTypes.map((type, i) => (
+                  <option key={i} value={type}>{type}</option>
+                ))}
+              </select>
+              {renderAnswerBox()}
             </div>
             <div className="card-footer d-flex flex-row-reverse bg-light">
               <Button variant="outlined" className="ms-3">
@@ -228,7 +245,7 @@ const AddForm = () => {
       body: JSON.stringify(tempData),
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     });
     console.log(res.status);
     const data = await res.json();

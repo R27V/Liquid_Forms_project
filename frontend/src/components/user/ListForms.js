@@ -69,7 +69,7 @@ const ListForms = () => {
 
     const data = await response.json();
     // console.log(data);
-    // navigate('/addform/'+data._id);
+    navigate('/user/editform/'+data._id);
   };
 
   const createNewFormBox = () => {
