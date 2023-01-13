@@ -64,11 +64,7 @@ const Header = () => {
                   Add Form
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/main/home2">
-                  Home2
-                </NavLink>
-              </li>
+              
               {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/user/listForm">
                   List Form
