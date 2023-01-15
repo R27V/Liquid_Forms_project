@@ -1,4 +1,4 @@
-import { ExpandMore } from "@mui/icons-material";
+import { ExpandMore, RemoveRedEye, Visibility } from "@mui/icons-material";
 import { Assignment } from "@mui/icons-material";
 import { PersonPin } from "@mui/icons-material";
 import update from "immutability-helper";
@@ -10,8 +10,11 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  Card,
+  CardContent,
   ClickAwayListener,
   FormControl,
+  IconButton,
   InputBase,
   InputLabel,
   MenuItem,
@@ -20,6 +23,7 @@ import {
   Tab,
   Tabs,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import React, { useState } from "react";
 
@@ -27,11 +31,12 @@ import { Ballot } from "@mui/icons-material";
 import { Formik } from "formik";
 import Swal from "sweetalert2";
 import app_config from "../../config";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import './addForm.css';
 
 const AddForm = () => {
   const url = app_config.api_url;
+  const navigate = useNavigate();
 
   const answerTypes = ["smalltext", "longtext", "checkbox", "radio", "file"];
 
@@ -45,7 +50,7 @@ const AddForm = () => {
   };
 
   const { formid } = useParams();
-  console.log(formid);
+  // console.log(formid);
 
   const [bgImages, setBgImages] = useState([
     "https://wallpaperaccess.com/full/643353.png",
@@ -108,7 +113,6 @@ const AddForm = () => {
   };
 
   const handleRename = (prop, val, ques_i) => {
-    // console.log(formData);
     let temp = formData[ques_i];
     temp[prop] = val;
     setFormData([
@@ -116,17 +120,6 @@ const AddForm = () => {
       temp,
       ...formData.slice(ques_i + 1),
     ]);
-    // return;
-    // const questions = {};
-    // if (prop === "ques_name") {
-    //   questions[ques_i] = { name: { $set: val } };
-    // }
-
-    // const newData = update(formData, {
-    //   questions: questions,
-    // });
-
-    // setFormData(newData);
   };
 
   const handleFileUpload = (prop, file, sect_i, ques_i) => {
@@ -153,13 +146,9 @@ const AddForm = () => {
     setFormData(newData);
   };
 
-  const newTheme = {
+  const newTheme = {};
 
-  };
-
-  const updateTheme = () => {
-
-  }
+  const updateTheme = () => {};
 
   const uploadThumbnail = (event) => {
     const data = new FormData();
@@ -200,9 +189,7 @@ const AddForm = () => {
     getformById();
   }, []);
 
-  const renderAnswerBox = () => {
-    
-  }
+  const renderAnswerBox = () => {};
 
   const renderCourse = () => {
     return formLoaded
@@ -215,12 +202,14 @@ const AddForm = () => {
                 variant="outlined"
                 value={question.name}
                 onChange={(e) =>
-                  handleRename("ques_name", e.target.value, ques_i)
+                  handleRename("name", e.target.value, ques_i)
                 }
               />
               <select className="form-control w-25 my-2">
                 {answerTypes.map((type, i) => (
-                  <option key={i} value={type}>{type}</option>
+                  <option key={i} value={type}>
+                    {type}
+                  </option>
                 ))}
               </select>
               {renderAnswerBox()}
@@ -272,6 +261,17 @@ const AddForm = () => {
     >
       <div className="col-md-8 mx-auto pt-4">
         {/* <div className="container"> */}
+        <Card className="my-2">
+          <CardContent>
+            <div className="d-flex justify-content-end">
+            <Tooltip title="Preview Form">
+              <IconButton  color="secondary" onClick={() => navigate('/main/preview/'+formDetails._id)}>
+                <Visibility />
+              </IconButton>
+              </Tooltip>
+            </div>
+          </CardContent>
+        </Card>
         <Paper square>
           <Tabs
             value={value}

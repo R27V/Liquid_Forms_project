@@ -23,6 +23,7 @@ import ResetPassword from "./components/main/ResetPassword";
 import HeaderDashboard from "./components/admin/HeaderDashboard";
 import MenuDashboard from "./components/admin/MenuDashboard";
 import Dash from "./components/admin/Dash";
+import Preview from "./components/main/Preview";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route element={<Login />} path="login" />
             <Route element={<Signup />} path="signup" />
             <Route element={<ContactInfo />} path="contactInfo" />
+            <Route element={<Preview />} path="preview/:formid" />
             <Route element={<ResetPassword />} path="resetpassword" />
           </Route>
 

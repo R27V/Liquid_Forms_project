@@ -69,7 +69,7 @@ const ListForms = () => {
 
     const data = await response.json();
     // console.log(data);
-    navigate('/user/editform/'+data._id);
+    navigate("/user/editform/" + data._id);
   };
 
   const createNewFormBox = () => {
@@ -191,10 +191,12 @@ const ListForms = () => {
         </div>
       </header>
 
-      <div className="container m-8 d-flex justify-content-center align-items-center">
-        <div className="container d-flex justify-content-center align-items-center">
-          {createNewFormBox()}
-          {displayTemplates()}
+      <div className="container m-8">
+        <div className="container">
+          <div className="row">
+            {createNewFormBox()}
+            {displayTemplates()}
+          </div>
         </div>
       </div>
     </div>
