@@ -1,25 +1,27 @@
-import { ExpandMore, RemoveRedEye, Visibility } from "@mui/icons-material";
+import {
+  ExpandMore,
+  Quiz,
+  RemoveRedEye,
+  Visibility,
+  Wallpaper,
+} from "@mui/icons-material";
 import { Assignment } from "@mui/icons-material";
 import { PersonPin } from "@mui/icons-material";
 import update from "immutability-helper";
 import "./updateForms.css";
 
 import {
-  Accordion,
-  AccordionActions,
-  AccordionDetails,
-  AccordionSummary,
   Button,
   Card,
   CardContent,
-  ClickAwayListener,
-  FormControl,
   IconButton,
-  InputBase,
-  InputLabel,
-  MenuItem,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Paper,
-  Select,
+  Switch,
   Tab,
   Tabs,
   TextField,
@@ -27,7 +29,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-import { Ballot } from "@mui/icons-material";
 import { Formik } from "formik";
 import Swal from "sweetalert2";
 import app_config from "../../config";
@@ -201,9 +202,7 @@ const AddForm = () => {
                 fullWidth
                 variant="outlined"
                 value={question.name}
-                onChange={(e) =>
-                  handleRename("name", e.target.value, ques_i)
-                }
+                onChange={(e) => handleRename("name", e.target.value, ques_i)}
               />
               <select className="form-control w-25 my-2">
                 {answerTypes.map((type, i) => (
@@ -264,10 +263,13 @@ const AddForm = () => {
         <Card className="my-2">
           <CardContent>
             <div className="d-flex justify-content-end">
-            <Tooltip title="Preview Form">
-              <IconButton  color="secondary" onClick={() => navigate('/main/preview/'+formDetails._id)}>
-                <Visibility />
-              </IconButton>
+              <Tooltip title="Preview Form">
+                <IconButton
+                  color="secondary"
+                  onClick={() => navigate("/main/preview/" + formDetails._id)}
+                >
+                  <Visibility />
+                </IconButton>
               </Tooltip>
             </div>
           </CardContent>
@@ -287,7 +289,7 @@ const AddForm = () => {
           </Tabs>
         </Paper>
 
-        <TabPanel value={value} index={0} style={{ backgroundColor: "red" }}>
+        <TabPanel value={value} index={0}>
           <div className="basic-details">
             <Formik
               initialValues={userForm}
@@ -330,19 +332,38 @@ const AddForm = () => {
         </TabPanel>
 
         <TabPanel value={value} index={1}>
-          <select
-            className="form-control"
-            onChange={(e) => setSelBgImg(e.target.value)}
-          >
-            {bgImages.map((img, i) => (
-              <option value={img} key={i}>
-                {img}
-              </option>
-            ))}
-          </select>
+          <List>
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Wallpaper />
+                </ListItemIcon>
+                <ListItemText primary="Background Image" />
+                <select
+                  className="form-control w-50"
+                  onChange={(e) => setSelBgImg(e.target.value)}
+                >
+                  {bgImages.map((img, i) => (
+                    <option value={img} key={i}>
+                      {img}
+                    </option>
+                  ))}
+                </select>
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Quiz />
+                </ListItemIcon>
+                <ListItemText primary="Make this Form a Quiz" />
+                  <Switch />
+              </ListItemButton>
+            </ListItem>
+          </List>
         </TabPanel>
 
-        <TabPanel value={value} index={1}>
+        <TabPanel value={value} index={2}>
           <select
             className="form-control"
             onChange={(e) => setSelBgColor(e.target.value)}
