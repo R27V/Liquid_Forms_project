@@ -51,7 +51,7 @@ const AddForm = () => {
     "https://wallpaperaccess.com/full/643353.png",
     "https://images.unsplash.com/photo-1616088410192-d1b123712994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bWluaW1hbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80",
     "https://wallpaperaccess.com/full/2906429.jpg",
-    "https://images.wallpapersden.com/image/download/minimal-hd-landscape_bWhsZ2WUmZqaraWkpJRmbmdlrWZlbWU.jpg",
+    "https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000",
     "https://wallpapercave.com/wp/wp2733308.jpg",
     "https://c4.wallpaperflare.com/wallpaper/150/795/765/beautiful-blue-water-green-nature-blue-and-green-picture-of-nature-wallpaper-preview.jpg",
     "https://wallpaperaccess.com/full/7445.jpg",
@@ -96,6 +96,7 @@ const AddForm = () => {
       return;
     }
     console.log(formData);
+
     const newQuestion = {
       name: "Untitled question",
       answer: "",
@@ -151,6 +152,14 @@ const AddForm = () => {
 
     setFormData(newData);
   };
+
+  const newTheme = {
+
+  };
+
+  const updateTheme = () => {
+
+  }
 
   const uploadThumbnail = (event) => {
     const data = new FormData();

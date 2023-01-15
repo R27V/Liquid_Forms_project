@@ -1,4 +1,5 @@
 import React from "react";
+import BasicSlider from "../common/BasicSlider";
 import "./home.css";
 
 const Home = () => {
@@ -32,9 +33,11 @@ const Home = () => {
             </div>
           </div>
           <div className="col-md-6 main">
-            <div className="d-flex  align-items-start justify-content-end">
-              
-                
+            <div
+              className="d-flex  align-items-start justify-content-end"
+              style={{ height: "560px", overflow: "hidden" }}
+            >
+              <BasicSlider />
             </div>
           </div>
         </div>
