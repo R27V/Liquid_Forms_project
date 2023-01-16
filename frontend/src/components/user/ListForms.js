@@ -136,7 +136,7 @@ const ListForms = () => {
               </p>
               <Link
                 to={"/user/editform/" + form._id}
-                className="btn btn-primary mr-8"
+                className="btn btn-primary mr-8 m-2"
               >
                 Edit
               </Link>

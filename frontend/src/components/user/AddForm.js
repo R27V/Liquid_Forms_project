@@ -271,6 +271,9 @@ const AddForm = () => {
                   <Visibility />
                 </IconButton>
               </Tooltip>
+              <button className="btn btn-primary m-2" onClick={updateForm}>
+          Save Form
+        </button>
             </div>
           </CardContent>
         </Card>
@@ -360,6 +363,15 @@ const AddForm = () => {
                   <Switch />
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                {/* <QuestionAnswerIcon>
+                
+                </QuestionAnswerIcon> */}
+                <ListItemText primary="Limit One Response" />
+                  <Switch />
+              </ListItemButton>
+            </ListItem>
           </List>
         </TabPanel>
 
@@ -376,9 +388,7 @@ const AddForm = () => {
           </select>
         </TabPanel>
         {/* </div> */}
-        <button className="btn btn-primary" onClick={updateForm}>
-          Save Form
-        </button>
+       
       </div>
     </div>
   );

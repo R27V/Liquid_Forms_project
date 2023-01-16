@@ -4,7 +4,7 @@ import "./BasicSlider.css";
 
 // const img =
   // "E:StudyRenuMERN Stack DevelopmentMajor_ProjectsLiquid_Forms\frontend\public\main\ContactForm.jpg";
-const registration = "https://wallpaperaccess.com/full/643353.png";
+const registration = "RegistrationForm.jpg";
 const contact = "ContactForm.jpg";
 const form = "https://wallpaperaccess.com/full/2722030.jpg";
 
