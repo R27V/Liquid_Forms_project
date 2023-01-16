@@ -1,4 +1,6 @@
 import {
+  Add,
+  Delete,
   ExpandMore,
   Quiz,
   RemoveRedEye,
@@ -14,13 +16,19 @@ import {
   Button,
   Card,
   CardContent,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
   IconButton,
+  InputLabel,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  MenuItem,
   Paper,
+  Select,
   Switch,
   Tab,
   Tabs,
@@ -39,7 +47,13 @@ const AddForm = () => {
   const url = app_config.api_url;
   const navigate = useNavigate();
 
-  const answerTypes = ["smalltext", "longtext", "checkbox", "radio", "file"];
+  const answerTypes = [
+    { value: "smalltext", label: "Small Text" },
+    { value: "longtext", label: "Long Text" },
+    { value: "checkbox", label: "Checkbox" },
+    { value: "radio", label: "Radio" },
+    { value: "file", label: "File" },
+  ];
 
   const formObj = {
     answer: "",
@@ -107,7 +121,7 @@ const AddForm = () => {
       name: "Untitled question",
       answer: "",
       mark: "",
-      options: [],
+      options: [{ label: "Untitled Option", checked: false}],
     };
 
     setFormData([...formData, newQuestion]);
@@ -122,6 +136,37 @@ const AddForm = () => {
       ...formData.slice(ques_i + 1),
     ]);
   };
+
+  const handleAddOption = (ques_i) => {
+    let temp = formData[ques_i];
+    temp.options.push({ label: "Untitled Option", checked: false });
+    setFormData([
+      ...formData.slice(0, ques_i),
+      temp,
+      ...formData.slice(ques_i + 1),
+    ]);
+  };
+
+  const handleRemoveOption = (ques_i, opt_i) => {
+    let temp = formData[ques_i];
+    temp.options.splice(opt_i, 1);
+    setFormData([
+      ...formData.slice(0, ques_i),
+      temp,
+      ...formData.slice(ques_i + 1),
+    ]);
+  };
+
+  const handleRenameOption = (ques_i, opt_i, val) => {
+    let temp = formData[ques_i];
+    temp.options[opt_i].label = val;
+    setFormData([
+      ...formData.slice(0, ques_i),
+      temp,
+      ...formData.slice(ques_i + 1),
+    ]);
+  };
+
 
   const handleFileUpload = (prop, file, sect_i, ques_i) => {
     const formData = new FormData();
@@ -147,9 +192,6 @@ const AddForm = () => {
     setFormData(newData);
   };
 
-  const newTheme = {};
-
-  const updateTheme = () => {};
 
   const uploadThumbnail = (event) => {
     const data = new FormData();
@@ -190,35 +232,103 @@ const AddForm = () => {
     getformById();
   }, []);
 
-  const renderAnswerBox = () => {};
+  const renderAnswerBox = ({ type, options }, index) => {
+    if (type === "smalltext") {
+      return <TextField className="mt-3 w-50" disabled variant="standard" />;
+    } else if (type === "longtext") {
+      return (
+        <TextField
+          className="mt-3"
+          disabled
+          fullWidth
+          multiline
+          rows={2}
+          variant="standard"
+        />
+      );
+    } else if (type === "checkbox") {
+      return options.map((option, opt_i) => (
+        <>
+          <div className="d-flex align-items-center">
+            <FormControlLabel
+              className="mt-3 ms-2"
+              key={opt_i}
+              control={<Checkbox checked={false} />}
+            />
+            <TextField value={option.label} onChange={e => handleRenameOption(index, opt_i, e.target.value)} className="w-50" variant="standard" />
+
+            <Tooltip title="Remove Option">
+              <IconButton
+                color="error"
+                className="mt-2"
+                onClick={(e) => handleRemoveOption(index, opt_i)}
+              >
+                <Delete />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </>
+      ));
+    }
+  };
 
   const renderCourse = () => {
     return formLoaded
       ? formData.map((question, ques_i) => (
           <div className="card question-card mb-4" key={ques_i}>
             <div className="card-body">
-              <TextField
-                label="Question"
-                fullWidth
-                variant="outlined"
-                value={question.name}
-                onChange={(e) => handleRename("name", e.target.value, ques_i)}
-              />
-              <select className="form-control w-25 my-2">
-                {answerTypes.map((type, i) => (
-                  <option key={i} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-              {renderAnswerBox()}
+              <div className="row">
+                <div className="col-8">
+                  <TextField
+                    label="Question"
+                    fullWidth
+                    variant="outlined"
+                    value={question.name}
+                    onChange={(e) =>
+                      handleRename("name", e.target.value, ques_i)
+                    }
+                  />
+                </div>
+                <div className="col-4">
+                  {/* <Select options={answerTypes} /> */}
+                  <FormControl fullWidth>
+                    <InputLabel id="answerType-label">Answer Type</InputLabel>
+                    <Select
+                      labelId="answerType-label"
+                      id="answerType"
+                      value={question.type}
+                      label="Answer Type"
+                      onChange={(e) =>
+                        handleRename("type", e.target.value, ques_i)
+                      }
+                    >
+                      {answerTypes.map((type) => {
+                        return (
+                          <MenuItem value={type.value}>{type.label}</MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+
+              {renderAnswerBox(question, ques_i)}
+              <Tooltip title="Add New Option">
+                <IconButton
+                  color="primary"
+                  className="ms-2"
+                  onClick={(e) => handleAddOption(ques_i)}
+                >
+                  <Add />
+                </IconButton>
+              </Tooltip>
             </div>
             <div className="card-footer d-flex flex-row-reverse bg-light">
               <Button variant="outlined" className="ms-3">
                 <i class="fas fa-copy"></i>
               </Button>
               <Button variant="outlined" color="error">
-                <i class="fas fa-trash    "></i>
+                <i class="fas fa-trash"></i>
               </Button>
             </div>
           </div>
@@ -315,7 +425,7 @@ const AddForm = () => {
                     rows={3}
                     label="Description"
                     variant="outlined"
-                    className="form-control form-control-lg mb-4"
+                    className="mb-4"
                     id="standard-basic"
                     onChange={handleChange}
                   />
@@ -360,7 +470,7 @@ const AddForm = () => {
                   <Quiz />
                 </ListItemIcon>
                 <ListItemText primary="Make this Form a Quiz" />
-                  <Switch />
+                <Switch />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
