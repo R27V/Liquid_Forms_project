@@ -47,7 +47,9 @@ const ListForms = () => {
             name: "",
             answer: "",
             type: "",
-            options: [],
+            options: [
+              {label : "Untitled Option", checked : false}
+            ],
             correct: "",
             mark: 0,
           },

@@ -24,6 +24,7 @@ import HeaderDashboard from "./components/admin/HeaderDashboard";
 import MenuDashboard from "./components/admin/MenuDashboard";
 import Dash from "./components/admin/Dash";
 import Preview from "./components/main/Preview";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function App() {
             <Route element={<Profile />} path="profile" />
             <Route element={<ResponseManage />} path="responseManage" />
           </Route>
+          <Route element={<NotFound />} path="*" />
         </Routes>
       </BrowserRouter>
     </div>

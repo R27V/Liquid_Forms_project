@@ -30,7 +30,7 @@ const Header = () => {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {/* Link */}
               <li className="nav-item">
-                <img src="logo1.png" style={{ height: "40px" }}/>
+                <img src="logo1.png" style={{ height: "40px" }} />
               </li>
 
               <li className="nav-item">
@@ -64,7 +64,7 @@ const Header = () => {
                   Add Form
                 </NavLink>
               </li>
-              
+
               {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/user/listForm">
                   List Form
@@ -80,11 +80,6 @@ const Header = () => {
                   Update User
                 </NavLink>
               </li> */}
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/main/preview">
-                  Preview
-                </NavLink>
-              </li>
             </ul>
             {/* Icons */}
             <ul className="navbar-nav d-flex flex-row me-1">
