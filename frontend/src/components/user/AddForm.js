@@ -2,8 +2,12 @@ import {
   Add,
   Delete,
   ExpandMore,
+  Forum,
+  Palette,
   Quiz,
   RemoveRedEye,
+  ThumbUpAlt,
+  ThumbUpAltRounded,
   Visibility,
   Wallpaper,
 } from "@mui/icons-material";
@@ -47,6 +51,9 @@ const AddForm = () => {
   const url = app_config.api_url;
   const navigate = useNavigate();
 
+  const [showConfMsg, setShowConfMsg] = useState(false);
+  const [responses, setResponses] = useState([]);
+
   const answerTypes = [
     { value: "smalltext", label: "Small Text" },
     { value: "longtext", label: "Long Text" },
@@ -80,7 +87,7 @@ const AddForm = () => {
 
   const [selBgImg, setSelBgImg] = useState(null);
 
-  const [bgColor, setbgColor] = useState(["red", "yellow", "blue", "green"]);
+  const [bgColor, setbgColor] = useState(null);
 
   const [selBgColor, setSelBgColor] = useState("#f3b0ff");
 
@@ -121,7 +128,7 @@ const AddForm = () => {
       name: "Untitled question",
       answer: "",
       mark: "",
-      options: [{ label: "Untitled Option", checked: false}],
+      options: [{ label: "Untitled Option", checked: false }],
     };
 
     setFormData([...formData, newQuestion]);
@@ -167,7 +174,6 @@ const AddForm = () => {
     ]);
   };
 
-
   const handleFileUpload = (prop, file, sect_i, ques_i) => {
     const formData = new FormData();
     formData.append("myfile", file);
@@ -191,7 +197,6 @@ const AddForm = () => {
 
     setFormData(newData);
   };
-
 
   const uploadThumbnail = (event) => {
     const data = new FormData();
@@ -222,6 +227,7 @@ const AddForm = () => {
 
     setFormData(dbFormData.data.questions);
     setFormDetails(dbFormData);
+    fetchResponses(dbFormData._id);
     setFormLoaded(true);
   };
 
@@ -255,7 +261,12 @@ const AddForm = () => {
               key={opt_i}
               control={<Checkbox checked={false} />}
             />
-            <TextField value={option.label} onChange={e => handleRenameOption(index, opt_i, e.target.value)} className="w-50" variant="standard" />
+            <TextField
+              value={option.label}
+              onChange={(e) => handleRenameOption(index, opt_i, e.target.value)}
+              className="w-50"
+              variant="standard"
+            />
 
             <Tooltip title="Remove Option">
               <IconButton
@@ -360,6 +371,12 @@ const AddForm = () => {
     //success alert
   };
 
+  const fetchResponses = async (formid) => {
+    const res = await fetch(url + "/response/getbyform/" + formid);
+    const data = await res.json();
+    console.log(data);
+  };
+
   return (
     <div
       className="main-form main-form-bg"
@@ -372,7 +389,10 @@ const AddForm = () => {
         {/* <div className="container"> */}
         <Card className="my-2">
           <CardContent>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-start">
+              <button className="btn btn-primary m-2" onClick={updateForm}>
+                Save Form
+              </button>
               <Tooltip title="Preview Form">
                 <IconButton
                   color="secondary"
@@ -381,9 +401,6 @@ const AddForm = () => {
                   <Visibility />
                 </IconButton>
               </Tooltip>
-              <button className="btn btn-primary m-2" onClick={updateForm}>
-          Save Form
-        </button>
             </div>
           </CardContent>
         </Card>
@@ -464,6 +481,20 @@ const AddForm = () => {
                 </select>
               </ListItemButton>
             </ListItem>
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Palette />
+                </ListItemIcon>
+                <ListItemText primary="Background Color" />
+                <input
+                  type="color"
+                  className="w-30"
+                  onChange={(e) => setSelBgColor(e.target.value)}
+                  defaultValue="#a856e1"
+                />
+              </ListItemButton>
+            </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -475,30 +506,44 @@ const AddForm = () => {
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
-                {/* <QuestionAnswerIcon>
-                
-                </QuestionAnswerIcon> */}
+                <ListItemIcon>
+                  <Forum />
+                </ListItemIcon>
                 <ListItemText primary="Limit One Response" />
-                  <Switch />
+                <Switch />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ThumbUpAltRounded />
+                </ListItemIcon>
+                <ListItemText primary="Confirmation Message" />
+                <Switch />
+                <TextField
+                  id="outlined-basic"
+                  label="Message"
+                  variant="outlined"
+                />
               </ListItemButton>
             </ListItem>
           </List>
         </TabPanel>
 
         <TabPanel value={value} index={2}>
-          <select
-            className="form-control"
-            onChange={(e) => setSelBgColor(e.target.value)}
-          >
-            {bgColor.map((color, i) => (
-              <option value={color} key={i}>
-                {color}
-              </option>
-            ))}
-          </select>
+          <List>
+            {/* <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Quiz />
+                </ListItemIcon>
+                <ListItemText primary="Make this Form a Quiz" />
+                <Switch />
+              </ListItemButton>
+            </ListItem> */}
+          </List>
         </TabPanel>
         {/* </div> */}
-       
       </div>
     </div>
   );

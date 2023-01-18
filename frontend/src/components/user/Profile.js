@@ -1,77 +1,146 @@
-import React from "react";
-import "./profile.css"
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import app_config from "../../config";
+
 const Profile = () => {
+  const [selImage, setSelImage] = useState("");
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+  const url = app_config.apiurl;
+
+  const [formList, setformList] = useState([]);
+
+  // getting saved user data from backend
+  const getData = async () => {
+    const response = await fetch("http://localhost:5000/form/getall");
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log(data);
+      setformList(data);
+    } else {
+      console.log("something went wrong");
+    }
+  };
+
+  // calling the above function
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const updateProfile = async (dataToUpdate) => {
+    const res = await fetch(url + "/user/update/" + currentUser._id, {
+      method: "PUT",
+      body: JSON.stringify(dataToUpdate),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(res.status);
+    const data = await res.json();
+    console.log(data);
+  };
+
+  const uploadFile = (e) => {
+    const file = e.target.files[0];
+    setSelImage(file.name);
+    const fd = new FormData();
+    fd.append("myfile", file);
+    fetch(url + "/profile/uploadfile", {
+      method: "POST",
+      body: fd,
+    }).then(async (res) => {
+      if (res.status === 200) {
+        console.log("file uploaded");
+        await updateProfile({ avatar: file.name });
+      }
+    });
+  };
+
   return (
-    <div >
-      <section className="vh-100" style={{ backgroundColor: "#f4f5f7" }}>
-        <div className="container py-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col col-lg-6 mb-4 mb-lg-0">
-              <div className="card mb-3" style={{ borderRadius: ".5rem" }}>
-                <div className="row g-0">
+    <section className="h-100 gradient-custom-2">
+      <div className="container py-5 h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="card ">
+            <div className="rounded-top text-white d-flex flex-row user-profile-top">
+              <div
+                className="ms-4 mt-5 d-flex flex-column"
+                style={{ width: 150 }}
+              >
+                <img
+                  src={currentUser.avatar?url+'/'+currentUser.avatar :"avatar.png"}
+                  alt="User Avatar"
+                  className="img-fluid img-thumbnail mt-4 mb-2"
+                  style={{ width: 150, zIndex: 1 }}
+                />
+                <label
+                  htmlFor="image"
+                  style={{
+                    zIndex: 1,
+                    display: "block",
+                    textAlign: "center",
+                    padding: 5,
+                    backgroundColor: "white",
+                    border: "2px solid black",
+                    borderRadius: 3,
+                    color: "black",
+                  }}
+                >
+                  Edit profile
+                </label>
+                <input type="file" hidden id="image" onChange={uploadFile} />
+              </div>
+              <div className="ms-3" style={{ marginTop: 130 }}>
+                <h5>{currentUser.username}</h5>
+                <p>{currentUser.email}</p>
+              </div>
+            </div>
+            <div
+              className="p-4 text-black"
+              style={{ backgroundColor: "#f8f9fa" }}
+            >
+              <div className="d-flex justify-content-end text-center py-1">
+                <div>
+                  <p className="mb-1 h5">ID : {currentUser._id}</p>
+                </div>
+              </div>
+            </div>
+            <div className="card-body p-4 text-black">
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <p className="lead fw-normal mb-0">Uploaded Novels</p>
+                <p className="mb-0">
+                  <a href="#!" className="text-muted">
+                    Show all
+                  </a>
+                </p>
+              </div>
+              <div className="row g-2">
+                {formList.map((novel) => (
                   <div
-                    className="col-md-4 gradient-custom text-center text-white"
-                    style={{
-                      borderTopLeftRadius: ".5rem",
-                      borderBottomLeftRadius: ".5rem",
-                    }}
+                    className="col-md-3 mb-2"
+                    style={{ height: "fit-content" }}
                   >
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                      alt="Avatar"
-                      className="img-fluid my-5"
-                      style={{ width: 80 }}
-                    />
-                    <h5>Marie Horwitz</h5>
-                    <p>Web Designer</p>
-                    <i className="far fa-edit mb-5" />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body p-4">
-                      <h6>Information</h6>
-                      <hr className="mt-0 mb-4" />
-                      <div className="row pt-1">
-                        <div className="col-6 mb-3">
-                          <h6>Email</h6>
-                          <p className="text-muted">info@example.com</p>
-                        </div>
-                        <div className="col-6 mb-3">
-                          <h6>Phone</h6>
-                          <p className="text-muted">123 456 789</p>
-                        </div>
-                      </div>
-                      <h6>My Forms</h6>
-                      <hr className="mt-0 mb-4" />
-                      <div className="row pt-1">
-                        <div className="col-6 mb-3">
-                          <h6>Recent</h6>
-                          <p className="text-muted">Lorem ipsum</p>
-                        </div>
-                        <div className="col-6 mb-3">
-                          <h6>Most Viewed</h6>
-                          <p className="text-muted">Dolor sit amet</p>
-                        </div>
-                      </div>
-                      <div className="d-flex justify-content-start">
-                        <a href="#!">
-                          <i className="fab fa-facebook-f fa-lg me-3" />
-                        </a>
-                        <a href="#!">
-                          <i className="fab fa-twitter fa-lg me-3" />
-                        </a>
-                        <a href="#!">
-                          <i className="fab fa-instagram fa-lg" />
-                        </a>
-                      </div>
+                    <div
+                      class="w-100 bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                      data-mdb-ripple-color="light"
+                    >
+                      <Link to={"/main/view/" + novel._id}>
+                        <img
+                          src={url + "/" + novel.image}
+                          alt=""
+                          className="w-100 rounded-3"
+                        />
+                      </Link>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

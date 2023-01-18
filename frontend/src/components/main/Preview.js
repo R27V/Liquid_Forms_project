@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import app_config from "../../config";
 
-const Preview = ({topHeader}) => {
+const Preview = ({ topHeader }) => {
   const { formid } = useParams();
   const [formDetails, setFormDetails] = useState(null);
   const [formLoading, setFormLoading] = useState(false);
@@ -24,6 +24,20 @@ const Preview = ({topHeader}) => {
   useEffect(() => {
     getformById();
   }, []);
+
+  const submitResponse = async () => {
+    await fetch(url + "/response/add", {
+      method: "POST",
+      body: JSON.stringify({
+        form: formDetails._id,
+        email: "",
+        createdAt: new Date(),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
 
   const renderForm = () => {
     return !formLoading && formDetails
@@ -54,6 +68,7 @@ const Preview = ({topHeader}) => {
           </div>
         </div>
         {renderForm()}
+        <button onClick={submitResponse}>Submit</button>
       </div>
     </div>
   );

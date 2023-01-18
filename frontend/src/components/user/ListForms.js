@@ -23,6 +23,8 @@ const ListForms = () => {
     setLoading(false);
   };
 
+
+
   const deleteForm = async (id) => {
     console.log("id user" + id);
     const response = await fetch("http://localhost:5000/form/delete/" + id, {
@@ -47,9 +49,7 @@ const ListForms = () => {
             name: "",
             answer: "",
             type: "",
-            options: [
-              {label : "Untitled Option", checked : false}
-            ],
+            options: [{ label: "Untitled Option", checked: false }],
             correct: "",
             mark: 0,
           },
@@ -91,7 +91,7 @@ const ListForms = () => {
                   <div>
                     <div className="d-flex justify-content-center align-items-center">
                       {" "}
-                      <img src="add.png" />
+                      <img src="addition.png" />
                     </div>
                     <div className="d-flex justify-content-center align-items-center">
                       <button
@@ -159,26 +159,25 @@ const ListForms = () => {
 
   return (
     <div
-      style={{
-        backgroundColor: "white",
-      }}
+      // style={{
+      //   backgroundColor: "white",
+      // }}
     >
-      <header className="bg-info">
+      <header style={{ background: 'url("")'}}>
         <div className="container py-5">
-          <h1
-            className="display-2 text-center"
+          <h2
+            className="text-center"
             style={{
               fontFamily: "serif",
               color: "black",
             }}
           >
             Form Templates
-          </h1>
-          <div className="input-group column d-flex justify-content-left align-items-left">
+          </h2>
+          <div className="input-group column d-flex justify-content-end align-items-end">
             <div className="form-outline">
               <input
                 type="search"
-                id="form1"
                 className="form-control"
                 style={{ backgroundColor: "white" }}
               />

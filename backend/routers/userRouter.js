@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Model = require("../models/userModel");
 const bcrypt = require("bcryptjs");
-const salt = bcrypt.genSaltSync(10);
+const salt = bcrypt.genSaltSync(10);   
 
 router.post("/add", (req, res) => {
     const formdata = req.body;
