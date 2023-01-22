@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import "./Signup.css";
@@ -132,6 +132,12 @@ const Signup = () => {
                       Submit
                     </Button>
                   </div>
+                  <div className="d-flex justify-content-center align-items-center">
+                      Already have an account? <span>
+                        <Link to="/main/login">LOGIN</Link>
+                      </span>
+                    </div>
+
                 </form>
               )}
             </Formik>

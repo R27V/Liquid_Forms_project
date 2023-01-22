@@ -12,7 +12,7 @@ const AdminAuth = ({children}) => {
         Swal.fire({
             icon : 'error',
             title : 'Something Went Wrong',
-        text : 'You have to SignUp first😎'
+        text : 'You have to SIGNUP first😎'
         })
         return <Navigate to="/main/login"/>
     }

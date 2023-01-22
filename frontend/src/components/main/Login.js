@@ -28,11 +28,10 @@ const Login = () => {
       console.log("request sent");
       resetForm();
       const data = await response.json();
-      if(data.isAdmin){
+      if (data.isAdmin) {
         sessionStorage.setItem("admin", JSON.stringify(data));
         navigate("/admin/usermanager");
-      }
-      else{
+      } else {
         sessionStorage.setItem("user", JSON.stringify(data));
         navigate("/user/listForm");
       }
@@ -63,7 +62,7 @@ const Login = () => {
       }}
     >
       <div className="container d-flex align-items-center justify-content-center">
-        <div className="card" style={{ width: "500px", height: "350px" }}>
+        <div className="card" style={{ width: "500px", height: "370px" }}>
           <div className="card-body">
             <Formik
               initialValues={{ email: "", password: "" }}
@@ -100,31 +99,35 @@ const Login = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="form-group clearfix">
-                    <div className="custom-control custom-checkbox float-left m-6">
-                      <FormGroup>
-                        <FormControlLabel
-                          control={<Checkbox defaultChecked />}
-                          label="Remember me"
-                        />
-                      </FormGroup>
-                    </div>
-                    <div className="forgot float-right m-6">
-                      <a href="#" id="forgot-link">
-                        Forgot Password?
-                      </a>
+                  <div className="row">
+                    <div className="form-group clearfix col d-flex justify-content-center">
+                      <div className="custom-control custom-checkbox float-left m-6">
+                        <FormGroup>
+                          <FormControlLabel
+                            control={<Checkbox defaultChecked />}
+                            label="Remember me"
+                          />
+                        </FormGroup>
+                      </div>
+                      <div className="col d-flex justify-content-center align-items-center">
+                        <a href="#" id="forgot-link">
+                          Forgot Password?
+                        </a>
+                      </div>
                     </div>
                   </div>
-                   <div className="row">
-                    <div className="col-md"> <Button type="submit" variant="contained">
+                  {/* <div className="row mb-2"> */}
+                  <div className="text-center mb-3">
+                    <Button fullWidth type="submit" variant="contained">
                       Submit
                     </Button>
-                    </div>
-                    <div className="col-md">
-                     Create account
-                    </div>
-                    
                   </div>
+                    <div className="d-flex justify-content-center align-items-center">
+                      NO ACCOUNT? <span>
+                        <Link to="/main/signup">SIGN UP</Link>
+                      </span>
+                    </div>
+                  {/* </div> */}
                 </form>
               )}
             </Formik>

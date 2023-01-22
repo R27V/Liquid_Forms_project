@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -15,8 +15,8 @@ const UserAuth = ({children}) => {
         text : 'You have to SignUp first😎'
         })
         return <Navigate to="/main/login"/>
-    }
+    };
 
-}
+};
 
-export default UserAuth
+export default UserAuth;

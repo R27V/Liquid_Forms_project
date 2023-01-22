@@ -25,11 +25,18 @@ import MenuDashboard from "./components/admin/MenuDashboard";
 import Dash from "./components/admin/Dash";
 import Preview from "./components/main/Preview";
 import NotFound from "./components/NotFound";
+import { useState } from "react";
+import UserProvider from "./components/context/UserProvider";
 
 function App() {
+
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
   return (
     <div>
       <BrowserRouter>
+      <UserProvider currentUser={currentUser}>
         <Routes>
           <Route element={<Navigate to="/main/home" />} path="/" />
 
@@ -74,6 +81,7 @@ function App() {
           </Route>
           <Route element={<NotFound />} path="*" />
         </Routes>
+        </UserProvider>
       </BrowserRouter>
     </div>
   );
