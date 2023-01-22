@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
   res.send("Response from Express");
 });
 
-app.use(express.static("./static/resources"));
+app.use(express.static("./static/uploads"));
 
 app.listen(port, () => {
   console.log("Server Started..");
