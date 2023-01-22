@@ -8,7 +8,7 @@ const Profile = () => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
-  const url = app_config.apiurl;
+  const url = app_config.api_url;
 
   const [formList, setformList] = useState([]);
 
