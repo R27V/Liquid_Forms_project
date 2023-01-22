@@ -23,8 +23,6 @@ const ListForms = () => {
     setLoading(false);
   };
 
-
-
   const deleteForm = async (id) => {
     console.log("id user" + id);
     const response = await fetch("http://localhost:5000/form/delete/" + id, {
@@ -160,35 +158,51 @@ const ListForms = () => {
 
   return (
     <div
-      // style={{
-      //   backgroundColor: "white",
-      // }}
+    // style={{
+    //   backgroundColor: "white",
+    // }}
     >
-      <header style={{ background: 'url("")'}}>
-        <div className="container py-5">
-          <h2
-            className="text-center"
-            style={{
-              fontFamily: "serif",
-              color: "black",
-            }}
-          >
-            Form Templates
-          </h2>
-          <div className="input-group column d-flex justify-content-end align-items-end">
-            <div className="form-outline">
-              <input
-                type="search"
-                className="form-control"
-                style={{ backgroundColor: "white" }}
-              />
-              <label className="form-label" htmlFor="form1">
-                Search
-              </label>
+      <header
+        style={{
+          backgroundImage:
+            'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TCupOMUEAgxfYM8AXSDJN4aA5EhvCk9A8g&usqp=CAU")',
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          
+        }}
+      >
+        <div className="container">
+          <div className="row container py-5">
+            <div className="col">
+              <div
+                className="text-center"
+                style={{
+                  fontFamily: "serif",
+                  fontSize: "40px",
+                  color : "white",
+                }}
+              >
+                Create more with Digital Templates
+              </div>
             </div>
-            <button type="button" className="btn btn-primary">
-              <i className="fas fa-search" />
-            </button>
+            <div className="col input-group column d-flex justify-content-end align-items-end">
+              <div className="form-outline d-flex  justify-content-end align-items-end">
+                <input
+                  type="search"
+                  className="form-control"
+                  style={{ backgroundColor: "white" }}
+                />
+                <label className="form-label" htmlFor="form1">
+                  Search
+                </label>
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                  >
+                    <i className="fas fa-search" />
+                  </button>
+              </div>
+            </div>
           </div>
         </div>
       </header>

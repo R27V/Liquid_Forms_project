@@ -47,7 +47,7 @@ const Profile = () => {
     setSelImage(file.name);
     const fd = new FormData();
     fd.append("myfile", file);
-    fetch(url + "/profile/uploadfile", {
+    fetch(url + "/util/uploadfile", {
       method: "POST",
       body: fd,
     }).then(async (res) => {
@@ -57,7 +57,6 @@ const Profile = () => {
       }
     });
   };
-
   return (
     <section className="h-100 gradient-custom-2">
       <div className="container py-5 h-100">
@@ -69,7 +68,11 @@ const Profile = () => {
                 style={{ width: 150 }}
               >
                 <img
-                  src={currentUser.avatar?url+'/'+currentUser.avatar :"avatar.png"}
+                  src={
+                    currentUser.avatar
+                      ? url + "/" + currentUser.avatar
+                      : "avatar.png"
+                  }
                   alt="User Avatar"
                   className="img-fluid img-thumbnail mt-4 mb-2"
                   style={{ width: 150, zIndex: 1 }}
@@ -108,7 +111,7 @@ const Profile = () => {
             </div>
             <div className="card-body p-4 text-black">
               <div className="d-flex justify-content-between align-items-center mb-4">
-                <p className="lead fw-normal mb-0">Uploaded Novels</p>
+                <p className="lead fw-normal mb-0">Uploaded Forms</p>
                 <p className="mb-0">
                   <a href="#!" className="text-muted">
                     Show all
@@ -116,7 +119,7 @@ const Profile = () => {
                 </p>
               </div>
               <div className="row g-2">
-                {formList.map((novel) => (
+                {formList.map((forms) => (
                   <div
                     className="col-md-3 mb-2"
                     style={{ height: "fit-content" }}
@@ -125,12 +128,12 @@ const Profile = () => {
                       class="w-100 bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                       data-mdb-ripple-color="light"
                     >
-                      <Link to={"/main/view/" + novel._id}>
-                        <img
-                          src={url + "/" + novel.image}
+                      <Link to={"/main/view/" + forms._id}>
+                        {/* <img
+                          src={url + "/" + forms.image}
                           alt=""
                           className="w-100 rounded-3"
-                        />
+                        /> */}
                       </Link>
                     </div>
                   </div>

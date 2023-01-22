@@ -121,7 +121,11 @@ const Footer = () => {
             <li>
               <a href="#">Privacy Policy</a>
             </li>
-            <li>© 2019 Copyright Nowrap Inc.</li>
+            <li>© 2019 Copyright:
+            <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
+        Digitalforms.com
+      </a>
+      </li>
           </ul>
         </section>
       </footer>
