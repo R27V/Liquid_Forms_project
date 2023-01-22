@@ -3,3 +3,13 @@
   background-size: cover;
   background-position: center;
 }
+
+.question-card{
+  border: 1px solid rgb(196, 134, 255);
+}
+
+.main-form{
+  height: 100vh;
+  overflow: auto;
+}
+

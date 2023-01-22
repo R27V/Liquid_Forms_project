@@ -42,7 +42,8 @@ const ListForms = () => {
   const createNewForm = async () => {
     const formdata = {
       title: "Untitled Form",
-      description: "abc",
+      heading: "",
+      description: "",
       data: {
         questions: [
           {

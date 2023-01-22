@@ -1,6 +1,7 @@
 import {
   Add,
   Delete,
+  DynamicForm,
   ExpandMore,
   Forum,
   Palette,
@@ -24,6 +25,7 @@ import {
   FormControl,
   FormControlLabel,
   IconButton,
+  InputAdornment,
   InputLabel,
   List,
   ListItem,
@@ -32,6 +34,8 @@ import {
   ListItemText,
   MenuItem,
   Paper,
+  Radio,
+  RadioGroup,
   Select,
   Switch,
   Tab,
@@ -39,7 +43,7 @@ import {
   TextField,
   Tooltip,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Formik } from "formik";
 import Swal from "sweetalert2";
@@ -61,6 +65,10 @@ const AddForm = () => {
     { value: "radio", label: "Radio" },
     { value: "file", label: "File" },
   ];
+
+  const [formTitle, setFormTitle] = useState("");
+  const [formHeading, setFormHeading] = useState("");
+  const [formDescription, setFormDescription] = useState("");
 
   const formObj = {
     answer: "",
@@ -174,6 +182,10 @@ const AddForm = () => {
     ]);
   };
 
+  const removeQuestion = (ques_i) => {
+    setFormData([...formData.slice(0, ques_i), ...formData.slice(ques_i + 1)]);
+  };
+
   const handleFileUpload = (prop, file, sect_i, ques_i) => {
     const formData = new FormData();
     formData.append("myfile", file);
@@ -227,6 +239,9 @@ const AddForm = () => {
 
     setFormData(dbFormData.data.questions);
     setFormDetails(dbFormData);
+    setFormTitle(dbFormData.title);
+    setFormDescription(dbFormData.description);
+    setFormHeading(dbFormData.heading);
     fetchResponses(dbFormData._id);
     setFormLoaded(true);
   };
@@ -237,6 +252,11 @@ const AddForm = () => {
     console.log(dataReady);
     getformById();
   }, []);
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => updateFormTitle(), 2000);
+    return () => clearTimeout(timeOutId);
+  }, [formTitle]);
 
   const renderAnswerBox = ({ type, options }, index) => {
     if (type === "smalltext") {
@@ -260,6 +280,34 @@ const AddForm = () => {
               className="mt-3 ms-2"
               key={opt_i}
               control={<Checkbox checked={false} />}
+            />
+            <TextField
+              value={option.label}
+              onChange={(e) => handleRenameOption(index, opt_i, e.target.value)}
+              className="w-50"
+              variant="standard"
+            />
+
+            <Tooltip title="Remove Option">
+              <IconButton
+                color="error"
+                className="mt-2"
+                onClick={(e) => handleRemoveOption(index, opt_i)}
+              >
+                <Delete />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </>
+      ));
+    } else if (type === "radio") {
+      return options.map((option, opt_i) => (
+        <>
+          <div className="d-flex align-items-center">
+            <FormControlLabel
+              className="mt-3 ms-2"
+              key={opt_i}
+              control={<Radio checked={false} />}
             />
             <TextField
               value={option.label}
@@ -324,21 +372,27 @@ const AddForm = () => {
               </div>
 
               {renderAnswerBox(question, ques_i)}
-              <Tooltip title="Add New Option">
-                <IconButton
-                  color="primary"
-                  className="ms-2"
-                  onClick={(e) => handleAddOption(ques_i)}
-                >
-                  <Add />
-                </IconButton>
-              </Tooltip>
+              {(question.type === "checkbox" || question.type === "radio") && (
+                <Tooltip title="Add New Option">
+                  <IconButton
+                    color="primary"
+                    className="ms-2"
+                    onClick={(e) => handleAddOption(ques_i)}
+                  >
+                    <Add />
+                  </IconButton>
+                </Tooltip>
+              )}
             </div>
             <div className="card-footer d-flex flex-row-reverse bg-light">
               <Button variant="outlined" className="ms-3">
                 <i class="fas fa-copy"></i>
               </Button>
-              <Button variant="outlined" color="error">
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={(e) => removeQuestion(ques_i)}
+              >
                 <i class="fas fa-trash"></i>
               </Button>
             </div>
@@ -358,6 +412,8 @@ const AddForm = () => {
     let tempData = formDetails;
     tempData.data.questions = formData;
     console.log(tempData);
+    tempData.heading = formHeading;
+    tempData.description = formDescription;
     const res = await fetch(url + "/form/update/" + formDetails._id, {
       method: "PUT",
       body: JSON.stringify(tempData),
@@ -377,6 +433,19 @@ const AddForm = () => {
     console.log(data);
   };
 
+  const updateFormTitle = async (value) => {
+    const res = await fetch(url + "/form/update/" + formDetails._id, {
+      method: "PUT",
+      body: JSON.stringify({ title: formTitle }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+    setFormDetails(data);
+  };
+
   return (
     <div
       className="main-form main-form-bg"
@@ -389,7 +458,19 @@ const AddForm = () => {
         {/* <div className="container"> */}
         <Card className="my-2">
           <CardContent>
-            <div className="d-flex justify-content-start">
+            <div className="d-flex justify-content-start align-items-center">
+              <TextField
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <DynamicForm />
+                    </InputAdornment>
+                  ),
+                }}
+                variant="standard"
+                onChange={(e) => setFormTitle(e.target.value)}
+                value={formTitle}
+              />
               <button className="btn btn-primary m-2" onClick={updateForm}>
                 Save Form
               </button>
@@ -421,34 +502,24 @@ const AddForm = () => {
 
         <TabPanel value={value} index={0}>
           <div className="basic-details">
-            <Formik
-              initialValues={userForm}
-              onSubmit={(formdata) => console.log(formdata)}
-              // validationSchema={formSchema}
-            >
-              {({ handleSubmit, handleChange, values, errors, touched }) => (
-                <form onSubmit={handleSubmit}>
-                  <TextField
-                    fullWidth
-                    label="Title"
-                    variant="outlined"
-                    className="form-control form-control-lg mb-4"
-                    id="standard-basic"
-                    onChange={handleChange}
-                  />
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={3}
-                    label="Description"
-                    variant="outlined"
-                    className="mb-4"
-                    id="standard-basic"
-                    onChange={handleChange}
-                  />
-                </form>
-              )}
-            </Formik>
+            <TextField
+              fullWidth
+              label="Form Header"
+              variant="outlined"
+              className="mb-4"
+              value={formHeading}
+              onChange={(e) => setFormHeading(e.target.value)}
+            />
+            <TextField
+              fullWidth
+              multiline
+              rows={3}
+              label="Form Description"
+              variant="outlined"
+              className="mb-4"
+              value={formDescription}
+              onChange={(e) => setFormDescription(e.target.value)}
+            />
           </div>
           <hr />
           <div className="form-customizer">{renderCourse()}</div>
