@@ -58,6 +58,8 @@ const AddForm = () => {
   const [showConfMsg, setShowConfMsg] = useState(false);
   const [responses, setResponses] = useState([]);
 
+  const [confMsg, setConfMsg] = useState("");
+
   const answerTypes = [
     { value: "smalltext", label: "Small Text" },
     { value: "longtext", label: "Long Text" },
@@ -244,6 +246,8 @@ const AddForm = () => {
     setFormHeading(dbFormData.heading);
     fetchResponses(dbFormData._id);
     setFormLoaded(true);
+    setConfMsg(dbFormData.data.confirmationMsg);
+    setIsQuiz()
   };
 
   React.useEffect(() => {
@@ -411,6 +415,7 @@ const AddForm = () => {
   const updateForm = async () => {
     let tempData = formDetails;
     tempData.data.questions = formData;
+    tempData.data.confirmationMsg = confMsg;
     console.log(tempData);
     tempData.heading = formHeading;
     tempData.description = formDescription;
@@ -590,11 +595,13 @@ const AddForm = () => {
                   <ThumbUpAltRounded />
                 </ListItemIcon>
                 <ListItemText primary="Confirmation Message" />
-                <Switch />
+                {/* <Switch checked={confMsg} /> */}
                 <TextField
                   id="outlined-basic"
                   label="Message"
                   variant="outlined"
+                  value={confMsg}
+                  onChange={(e) => setConfMsg(e.target.value)}
                 />
               </ListItemButton>
             </ListItem>

@@ -53,12 +53,20 @@ const ListForms = () => {
             mark: 0,
           },
         ],
+        confirmationMsg: '',
+        isQuiz: false,
+        limitResponses: false,
+        dbType : '',
+        dbSrc: null,
         styles: {},
       },
       user: currentUser._id,
       createdAt: new Date(),
       lastUpdate: new Date(),
     };
+
+    
+
     console.log(formdata);
     const response = await fetch("http://localhost:5000/form/add", {
       method: "POST",

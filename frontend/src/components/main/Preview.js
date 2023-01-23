@@ -65,6 +65,7 @@ const Preview = () => {
       body: JSON.stringify({
         form: formDetails._id,
         email: "",
+        data: response,
         createdAt: new Date(),
       }),
       headers: {
