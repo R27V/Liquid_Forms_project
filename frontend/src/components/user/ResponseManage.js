@@ -1,6 +1,13 @@
-import { Divider, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
+import {QuestionMark} from "@mui/icons-material";
 
 const ResponseManage = ({ formid }) => {
   const [responseList, setResponseList] = useState([]);
@@ -49,7 +56,7 @@ const ResponseManage = ({ formid }) => {
             ))}
           </Select>
         </FormControl>
-        <Divider />
+        <Divider className="my-3" />
         {selResponse && (
           <div>
             <div className="row">
@@ -57,13 +64,22 @@ const ResponseManage = ({ formid }) => {
                 <p>Email : </p>
                 <p>Form ID : </p>
               </div>
+              <div className="col-md-4">
+                <p className="fw-bold">{responseList[selResponse]._id}</p>
+                <p className="fw-bold">{responseList[selResponse].email}</p>
+              </div>
             </div>
-            <h1>{responseList[selResponse].email}</h1>
-            <h2>{responseList[selResponse].email}</h2>
-            <h3>{responseList[selResponse].message}</h3>
-          </div>
+            <Divider className="my-3" />
+            <p className="text-muted">Form Response</p>
+            {responseList[selResponse].data.map((question) => (
+              <>
 
-            )}
+                 <p>{question.name}</p>
+                <p>{question.answer}</p>
+              </>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
