@@ -94,26 +94,8 @@ const Header = () => {
             </ul>
             {/* Icons */}
             <ul className="navbar-nav d-flex flex-row me-1">
-              <li className="nav-item me-3 me-lg-0">
-                {loggedin ? (
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => {
-                      setLoggedin(false);
-                    }}
-                  >
-                    <i className="fas fa-sign-out-alt"></i>Logout
-                  </button>
-                ) : (
-                  <NavLink className="btn btn-primary" to="/main/login">
-                    <i className="fas fa-sign-in"></i> Login
-                  </NavLink>
-                )}
-              </li>
-            </ul>
-          </div>
-
-          <div className="d-flex align-items-center">
+              <li>
+              <div className="d-flex align-items-center">
             {/* Avatar */}
             <div className="dropdown">
               <a
@@ -154,6 +136,27 @@ const Header = () => {
               </ul>
             </div>
           </div>
+              </li>
+              <li className="nav-item me-3 me-lg-0">
+                {loggedin ? (
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      setLoggedin(false);
+                    }}
+                  >
+                    <i className="fas fa-sign-out-alt"></i>Logout
+                  </button>
+                ) : (
+                  <NavLink className="btn btn-primary" to="/main/login">
+                    <i className="fas fa-sign-in"></i> Login
+                  </NavLink>
+                )}
+              </li>
+            </ul>
+          </div>
+
+          
         </div>
       </nav>
     </>

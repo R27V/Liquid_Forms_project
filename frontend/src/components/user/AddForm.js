@@ -605,11 +605,6 @@ const AddForm = () => {
                 />
               </ListItemButton>
             </ListItem>
-          </List>
-        </TabPanel>
-
-        <TabPanel value={value} index={2}>
-          <List>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -635,6 +630,12 @@ const AddForm = () => {
             
             
 </ListItem>
+          </List>
+        </TabPanel>
+
+        <TabPanel value={value} index={2}>
+          <List>
+            
           </List>
         </TabPanel>
         {/* </div> */}
