@@ -49,6 +49,7 @@ import { Formik } from "formik";
 import Swal from "sweetalert2";
 import app_config from "../../config";
 import { useNavigate, useParams } from "react-router-dom";
+import ResponseManage from "./ResponseManage";
 // import './addForm.css';
 
 const AddForm = () => {
@@ -247,7 +248,7 @@ const AddForm = () => {
     fetchResponses(dbFormData._id);
     setFormLoaded(true);
     setConfMsg(dbFormData.data.confirmationMsg);
-    setIsQuiz()
+    setIsQuiz();
   };
 
   React.useEffect(() => {
@@ -612,31 +613,29 @@ const AddForm = () => {
                 </ListItemIcon>
                 {/* <ListItemText primary="Make this Form a Quiz" /> */}
                 <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Database Connection</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    // value={Select database}
-    label="Select database"
-    // onChange={handleChange}
-  >
-    <MenuItem value={10}>Google Sheets</MenuItem>
-    <MenuItem value={20}>MongoDB</MenuItem>
-    <MenuItem value={30}>MySql</MenuItem>
-  </Select>
-</FormControl>
+                  <InputLabel id="demo-simple-select-label">
+                    Database Connection
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    // value={Select database}
+                    label="Select database"
+                    // onChange={handleChange}
+                  >
+                    <MenuItem value={10}>Google Sheets</MenuItem>
+                    <MenuItem value={20}>MongoDB</MenuItem>
+                    <MenuItem value={30}>MySql</MenuItem>
+                  </Select>
+                </FormControl>
                 {/* <Switch /> */}
               </ListItemButton>
-            
-            
-</ListItem>
+            </ListItem>
           </List>
         </TabPanel>
 
         <TabPanel value={value} index={2}>
-          <List>
-            
-          </List>
+          {formDetails !== null && <ResponseManage formid={formDetails._id} />}
         </TabPanel>
         {/* </div> */}
       </div>

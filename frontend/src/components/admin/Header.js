@@ -5,7 +5,7 @@ import app_config from "../../config";
 const Header = () => {
   const [loggedin, setLoggedin] = useState(false);
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(sessionStorage.getItem("user"))
+    JSON.parse(sessionStorage.getItem("admin"))
   );
   const url = app_config.api_url;
 

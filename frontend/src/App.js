@@ -27,60 +27,67 @@ import Preview from "./components/main/Preview";
 import NotFound from "./components/NotFound";
 import { useState } from "react";
 import UserProvider from "./components/context/UserProvider";
+import CheckLogin from "./CheckLogin";
 
 function App() {
-
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
   return (
     <div>
       <BrowserRouter>
-      <UserProvider currentUser={currentUser}>
-        <Routes>
-          <Route element={<Navigate to="/main/home" />} path="/" />
+        <UserProvider currentUser={currentUser}>
+          <Routes>
+            <Route element={<Navigate to="/main/home" />} path="/" />
 
-          <Route element={<Main />} path="main">
-            <Route element={<Home />} path="home" />
-            <Route element={<Login />} path="login" />
-            <Route element={<Signup />} path="signup" />
-            <Route element={<ContactInfo />} path="contactInfo" />
-            <Route element={<Preview />} path="preview/:formid" />
-            <Route element={<ResetPassword />} path="resetpassword" />
-          </Route>
+            <Route element={<Main />} path="main">
+              <Route element={<Home />} path="home" />
+              <Route
+                element={
+                  <CheckLogin redirect="/user/listForm" sessionVar='user'>
+                    <Login />
+                  </CheckLogin>
+                }
+                path="login"
+              />
+              <Route element={<Signup />} path="signup" />
+              <Route element={<ContactInfo />} path="contactInfo" />
+              <Route element={<Preview />} path="preview/:formid" />
+              <Route element={<ResetPassword />} path="resetpassword" />
+            </Route>
 
-          <Route
-            element={
-              <AdminAuth>
-                <Admin />
-              </AdminAuth>
-            }
-            path="admin"
-          >
-            <Route element={<UserManager />} path="usermanager" />
-            <Route element={<UpdateUser />} path="updateuser" />
-            <Route element={<Dashboard />} path="dashboard" />
-            <Route element={<HeaderDashboard />} path="headerDashboard" />
-            <Route element={<MenuDashboard />} path="MenuDashboard" />
-            <Route element={<Dash />} path="dash" />
-          </Route>
+            <Route
+              element={
+                <AdminAuth>
+                  <Admin />
+                </AdminAuth>
+              }
+              path="admin"
+            >
+              <Route element={<UserManager />} path="usermanager" />
+              <Route element={<UpdateUser />} path="updateuser" />
+              <Route element={<Dashboard />} path="dashboard" />
+              <Route element={<HeaderDashboard />} path="headerDashboard" />
+              <Route element={<MenuDashboard />} path="MenuDashboard" />
+              <Route element={<Dash />} path="dash" />
+            </Route>
 
-          <Route
-            element={
-              <UserAuth>
-                <User />
-              </UserAuth>
-            }
-            path="user"
-          >
-            <Route element={<ManageAssets />} path="manageAsset" />
-            <Route element={<AddForm />} path="editform/:formid" />
-            <Route element={<ListForms />} path="listForm" />
-            <Route element={<Profile />} path="profile" />
-            <Route element={<ResponseManage />} path="responseManage" />
-          </Route>
-          <Route element={<NotFound />} path="*" />
-        </Routes>
+            <Route
+              element={
+                <UserAuth>
+                  <User />
+                </UserAuth>
+              }
+              path="user"
+            >
+              <Route element={<ManageAssets />} path="manageAsset" />
+              <Route element={<AddForm />} path="editform/:formid" />
+              <Route element={<ListForms />} path="listForm" />
+              <Route element={<Profile />} path="profile" />
+              <Route element={<ResponseManage />} path="responseManage" />
+            </Route>
+            <Route element={<NotFound />} path="*" />
+          </Routes>
         </UserProvider>
       </BrowserRouter>
     </div>

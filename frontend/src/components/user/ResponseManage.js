@@ -1,59 +1,41 @@
-
 import { Formik } from "formik";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const ResponseManage = () => {
+const ResponseManage = ({ formid }) => {
+  const [responseList, setResponseList] = useState([]);
+
+  const fetchResponses = async () => {
+    const res = await fetch(
+      `http://localhost:5000/response/getbyform/${formid}`
+    );
+    const data = await res.json();
+    console.log(data);
+    setResponseList(data);
+  };
+
+  useEffect(() => {
+    fetchResponses();
+  }, []);
+
+  const showResponses = () => {
+    return responseList.map((response) => {
+      return (
+        <div key={response._id}>
+          <h1>{response.name}</h1>
+          <h2>{response.email}</h2>
+          <h3>{response.message}</h3>
+        </div>
+      );
+    });
+  };
+
   return (
     <div>
-
-            <div className="section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="section-title">
-                                <h2 className="title">Contact Us</h2>
-                                <p>Let us know what you think! In order to provide better service,
-                                     please do not hesitate to give us your feedback. Thank you.</p><hr/>
-                                     <Formik>
-                                <form id="contact-form" onSubmit={this.submitEmail.bind(this)} 
-                                    method="POST">
-                                <div className="form-group">
-                                <div className="row">
-                                <div className="col-md-6">
-                                    <input placeholder = "Name"  id="name" type="text" 
-                                       className="form-control" required value={this.state.name} 
-                                       onChange={this.onNameChange.bind(this)}/>
-                                </div>
-                                <div className="col-md-6">
-                                    <input placeholder = "Email"  id="email" type="email"
-                                      className="form-control" aria-describedby="emailHelp"
-                                      required value={this.state.email} onChange=
-                                      {this.onEmailChange.bind(this)}/>
-                                </div>
-                                </div>
-                                </div>
-                                <div className="form-group">
-                                    <input placeholder = "Subject"  id="subject" type="text"
-                                      className="form-control" required value={this.state.subject}
-                                      onChange={this.onSubjectChange.bind(this)}/>
-                                </div>
-                                <div className="form-group">
-                                    <textarea placeholder = "Message"  id="message" 
-                                       className="form-control" rows="1" 
-                                       required value={this.state.message}
-                                       onChange= {this.onMsgChange.bind(this)}/>
-                                </div>
-                                <button type="submit" className="primary-btn submit">Submit</button>
-                                </form>
-                                </Formik>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-  
+      <div className="section">
+        <div className="container">
+          <div className="row"></div>
+        </div>
+      </div>
     </div>
   );
 };
