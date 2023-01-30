@@ -40,6 +40,8 @@ const Profile = () => {
     console.log(res.status);
     const data = await res.json();
     console.log(data);
+    sessionStorage.setItem('user', JSON.stringify(data));
+    setCurrentUser(data);
   };
 
   const uploadFile = (e) => {
@@ -62,7 +64,11 @@ const Profile = () => {
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="card ">
-            <div className="rounded-top text-white d-flex flex-row user-profile-top">
+            <div className="rounded-top text-white d-flex flex-row user-profile-top" 
+            style={{ backgroundImage: 'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwBSvFXRBC6mFCxjufgt5y18lMSafxzjq6rQ&usqp=CAU")',
+          backgroundRepeat: "no-repeat",
+        backgroundSize: "cover"}}
+            >
               <div
                 className="ms-4 mt-5 d-flex flex-column"
                 style={{ width: 150 }}
@@ -94,8 +100,12 @@ const Profile = () => {
                 </label>
                 <input type="file" hidden id="image" onChange={uploadFile} />
               </div>
-              <div className="ms-3" style={{ marginTop: 130 }}>
-                <h5>{currentUser.username}</h5>
+              <div className="ms-3" style={{ marginTop: 130,
+              color: "dark blue" ,
+              // backgroundColor: "white"
+              fontWeight:"bolder"
+              }}>
+                <h3>{currentUser.name}</h3>
                 <p>{currentUser.email}</p>
               </div>
             </div>

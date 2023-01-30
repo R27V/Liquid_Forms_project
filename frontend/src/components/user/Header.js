@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import app_config from "../../config";
 // import { useUserContext } from "../../context/UserProvider";
 
-
 const Header = () => {
   const [loggedin, setLoggedin] = useState(false);
   const [currentUser, setCurrentUser] = useState(
@@ -95,47 +94,47 @@ const Header = () => {
             {/* Icons */}
             <ul className="navbar-nav d-flex flex-row me-1">
               <li>
-              <div className="d-flex align-items-center">
-            {/* Avatar */}
-            <div className="dropdown">
-              <a
-                className="dropdown-toggle d-flex align-items-center hidden-arrow"
-                href="#"
-                id="navbarDropdownMenuAvatar"
-                role="button"
-                data-mdb-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  src={
-                    currentUser.avatar
-                      ? url + "/" + currentUser.avatar
-                      : "avatar.png"
-                  }
-                  className="rounded-circle"
-                  height={30}
-                  alt="User Avatar"
-                  loading="lazy"
-                />
-              </a>
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownMenuAvatar"
-              >
-                <li>
-                  <NavLink className="dropdown-item" to="/user/profile">
-                    My profile
-                  </NavLink>
-                </li>
-                
-                {/* <li>
+                <div className="d-flex align-items-center mr-3 mt-1">
+                  {/* Avatar */}
+                  <div className="dropdown">
+                    <a
+                      className="dropdown-toggle d-flex align-items-center hidden-arrow"
+                      href="#"
+                      id="navbarDropdownMenuAvatar"
+                      role="button"
+                      data-mdb-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src={
+                          currentUser.avatar
+                            ? url + "/" + currentUser.avatar
+                            : "avatar.png"
+                        }
+                        className="rounded-circle"
+                        height={30}
+                        alt="User Avatar"
+                        loading="lazy"
+                      />
+                    </a>
+                    <ul
+                      className="dropdown-menu dropdown-menu-end"
+                      aria-labelledby="navbarDropdownMenuAvatar"
+                    >
+                      <li>
+                        <NavLink className="dropdown-item" to="/user/profile">
+                          My profile
+                        </NavLink>
+                      </li>
+
+                      {/* <li>
                   <button onClick={logout} className="dropdown-item" href="#">
                     Logout
                   </button>
                 </li> */}
-              </ul>
-            </div>
-          </div>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li className="nav-item me-3 me-lg-0">
                 {loggedin ? (
@@ -155,8 +154,6 @@ const Header = () => {
               </li>
             </ul>
           </div>
-
-          
         </div>
       </nav>
     </>
