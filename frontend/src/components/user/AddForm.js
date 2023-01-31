@@ -2,11 +2,13 @@ import {
   Add,
   Delete,
   DynamicForm,
+  ExpandLess,
   ExpandMore,
   Forum,
   Palette,
   Quiz,
   RemoveRedEye,
+  Storage,
   ThumbUpAlt,
   ThumbUpAltRounded,
   Visibility,
@@ -22,6 +24,7 @@ import {
   Card,
   CardContent,
   Checkbox,
+  Collapse,
   FormControl,
   FormControlLabel,
   IconButton,
@@ -58,6 +61,11 @@ const AddForm = () => {
 
   const [showConfMsg, setShowConfMsg] = useState(false);
   const [responses, setResponses] = useState([]);
+
+  const [confMsgOpen, setConfMsgOpen] = useState(false);
+
+  // 1: color , 2: image
+  const [background, setBackground] = useState(1);
 
   const [confMsg, setConfMsg] = useState("");
 
@@ -456,10 +464,13 @@ const AddForm = () => {
   return (
     <div
       className="main-form main-form-bg"
-      style={{
-        backgroundImage: selBgImg ? `url('${selBgImg}')` : "white",
-        backgroundColor: selBgColor ? `${selBgColor}` : "white",
-      }}
+      style={
+        background === 1
+          ? { backgroundImage: selBgImg ? `url('${selBgImg}')` : "white" }
+          : {
+              backgroundColor: selBgColor ? `${selBgColor}` : "white",
+            }
+      }
     >
       <div className="col-md-8 mx-auto pt-4">
         {/* <div className="container"> */}
@@ -542,11 +553,30 @@ const AddForm = () => {
         <TabPanel value={value} index={1}>
           <List>
             <ListItem>
-              <ListItemButton>
+              <ListItemIcon>
+                <Wallpaper />
+              </ListItemIcon>
+              <ListItemText primary="Background Image" />
+              <FormControl className="w-50">
+                <InputLabel id="back-select">Select Background</InputLabel>
+                <Select
+                  labelId="back-select"
+                  id="back-select-simple"
+                  value={background}
+                  label="Select Background"
+                  onChange={(e) => setBackground(e.target.value)}
+                >
+                  <MenuItem value={1}>Image</MenuItem>
+                  <MenuItem value={2}>Color</MenuItem>
+                </Select>
+              </FormControl>
+            </ListItem>
+            {background === 1 ? (
+              <ListItem>
                 <ListItemIcon>
-                  <Wallpaper />
+                  <Palette />
                 </ListItemIcon>
-                <ListItemText primary="Background Image" />
+                <ListItemText primary="Background Color" />
                 <select
                   className="form-control w-50"
                   onChange={(e) => setSelBgImg(e.target.value)}
@@ -557,10 +587,9 @@ const AddForm = () => {
                     </option>
                   ))}
                 </select>
-              </ListItemButton>
-            </ListItem>
-            <ListItem>
-              <ListItemButton>
+              </ListItem>
+            ) : (
+              <ListItem>
                 <ListItemIcon>
                   <Palette />
                 </ListItemIcon>
@@ -569,48 +598,51 @@ const AddForm = () => {
                   type="color"
                   className="w-30"
                   onChange={(e) => setSelBgColor(e.target.value)}
-                  defaultValue="#a856e1"
+                  defaultValue={selBgColor}
                 />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
+              </ListItem>
+            )}
+            <ListItem>
+              <ListItem>
                 <ListItemIcon>
                   <Quiz />
                 </ListItemIcon>
                 <ListItemText primary="Make this Form a Quiz" />
                 <Switch />
-              </ListItemButton>
+              </ListItem>
             </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
+            <ListItem>
+              <ListItem>
                 <ListItemIcon>
                   <Forum />
                 </ListItemIcon>
                 <ListItemText primary="Limit One Response" />
                 <Switch />
-              </ListItemButton>
+              </ListItem>
             </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={e => setConfMsgOpen(!confMsgOpen)}>
                 <ListItemIcon>
                   <ThumbUpAltRounded />
                 </ListItemIcon>
                 <ListItemText primary="Confirmation Message" />
-                {/* <Switch checked={confMsg} /> */}
-                <TextField
+                {confMsgOpen ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={confMsgOpen} timeout="out" unmountOnExit style={{height: '100%'}}>
+              <TextField
                   id="outlined-basic"
                   label="Message"
                   variant="outlined"
+                  multiline
+                  rows={4}
+                  fullWidth
                   value={confMsg}
+                  className="mt-3"
                   onChange={(e) => setConfMsg(e.target.value)}
                 />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
+              </Collapse>
+              <ListItem>
                 <ListItemIcon>
-                  <Quiz />
+                  <Storage />
                 </ListItemIcon>
                 {/* <ListItemText primary="Make this Form a Quiz" /> */}
                 <FormControl fullWidth>
@@ -630,8 +662,7 @@ const AddForm = () => {
                   </Select>
                 </FormControl>
                 {/* <Switch /> */}
-              </ListItemButton>
-            </ListItem>
+              </ListItem>
           </List>
         </TabPanel>
 
