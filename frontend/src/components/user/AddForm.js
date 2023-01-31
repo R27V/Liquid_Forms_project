@@ -94,6 +94,7 @@ const AddForm = () => {
     "https://c4.wallpaperflare.com/wallpaper/150/795/765/beautiful-blue-water-green-nature-blue-and-green-picture-of-nature-wallpaper-preview.jpg",
     "https://wallpaperaccess.com/full/7445.jpg",
     "https://wallpaperaccess.com/full/2722030.jpg",
+    "https://as2.ftcdn.net/v2/jpg/01/77/20/33/1000_F_177203359_86UWu7p2lI9ZWodqy53OmxoiBR8sfLFd.jpg"
   ]);
 
   const [selBgImg, setSelBgImg] = useState(null);
