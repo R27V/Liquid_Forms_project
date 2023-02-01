@@ -26,8 +26,9 @@ import Dash from "./components/admin/Dash";
 import Preview from "./components/main/Preview";
 import NotFound from "./components/NotFound";
 import { useState } from "react";
-import UserProvider from "./components/context/UserProvider";
 import CheckLogin from "./CheckLogin";
+import UserProvider from "./context/UserProvider";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(
@@ -35,6 +36,7 @@ function App() {
   );
   return (
     <div>
+      <Toaster position="top-right" />
       <BrowserRouter>
         <UserProvider currentUser={currentUser}>
           <Routes>

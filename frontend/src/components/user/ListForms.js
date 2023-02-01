@@ -1,11 +1,21 @@
-import { Typography,styled, alpha, Box, AppBar, Toolbar, IconButton,  } from "@mui/material";
+import {
+  Typography,
+  styled,
+  alpha,
+  Box,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import EllipsedLabel from "../common/EllipsedLabel";
-import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+import InputBase from "@mui/material/InputBase";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import { Add } from "@mui/icons-material";
 
 const ListForms = () => {
   const [currentUser, setCurrentUser] = useState(
@@ -57,10 +67,10 @@ const ListForms = () => {
             mark: 0,
           },
         ],
-        confirmationMsg: '',
+        confirmationMsg: "",
         isQuiz: false,
         limitResponses: false,
-        dbType : '',
+        dbType: "",
         dbSrc: null,
         styles: {},
       },
@@ -68,8 +78,6 @@ const ListForms = () => {
       createdAt: new Date(),
       lastUpdate: new Date(),
     };
-
-    
 
     console.log(formdata);
     const response = await fetch("http://localhost:5000/form/add", {
@@ -127,31 +135,36 @@ const ListForms = () => {
   const displayTemplates = () => {
     if (!loading && formList)
       return formList.map((form) => (
-        <div className="col-sm-6 col-md-4">
+        <div className="col-sm-4 col-md-3">
           <div
-            className="card p-4 m-4"
-            style={{
-              backgroundColor: " rgb(226 218 218)",
-            }}
+            className="card h-100 theme-accent-back"
+            
           >
             <div className="card-body">
-              <h5 className="card-title">{form.title}</h5>
+              <div className="d-flex align-items-center">
+                <img src="add-btn-image.png" className="d-block me-2" style={{height: 40}} alt="" />
+              <p className="h2">{form.title}</p>
+              </div>
               <p
-                className="card-text"
+                className="card-text mt-2"
+                // style={{ height: 50 }}
                 data-mdb-toggle="tooltip"
                 title={form.description}
               >
                 {form.description ? (
                   form.description.substring(0, 80) + "..."
                 ) : (
-                  <p className="text-muted">No Description</p>
+                  'No Description'
                 )}
               </p>
-              <Link
+              
+            </div>
+            <div className="card-footer">
+            <Link
                 to={"/user/editform/" + form._id}
-                className="btn btn-primary mr-8 m-2"
+                className="btn btn-primary m-2"
               >
-                Edit
+                <i class="fas fa-pen-alt "></i>
               </Link>
               <button
                 className="btn btn-danger"
@@ -167,109 +180,105 @@ const ListForms = () => {
       ));
     else return <h1>Loading...</h1>;
   };
- 
+
   // Search Bar
-  const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
+    "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: 'auto',
+      width: "auto",
     },
   }));
-  
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
+
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }));
-  
+
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
+    color: "inherit",
+    "& .MuiInputBase-input": {
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        width: "12ch",
+        "&:focus": {
+          width: "20ch",
         },
       },
     },
   }));
 
   return (
-    <div
-    // style={{
-    //   backgroundColor: "white",
-    // }}
-    >
+    <div>
       <header
         style={{
           backgroundImage:
-            'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYXJYToUTPVAPTvxASx8EtJfoBPvWvRXooOA&usqp=CAU")',
+            'linear-gradient(0deg, #000000ac, #000000ac), url("addform-header.png")',
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          
+          backgroundPosition: "center",
         }}
       >
-        <div className="container">
-          <div className="row container py-5">
-            <div className="col">
-              <div
-                className="text-center"
-                style={{
-                  fontFamily: "serif",
-                  fontSize: "40px",
-                  color : "white",
-                }}
-              >
-                Create more with Digital Templates
-              </div>
-            </div>
-            <div className="col input-group column d-flex justify-content-end align-items-end">
-              <div className="form-outline d-flex  justify-content-end align-items-end">
-                <img src="member.png" />
-              <Box sx={{ flexGrow: 1 }}>
-      
-        
-          <Search position="static" style={{ backgroundColor : "white"}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-      
-      
-    </Box>
-              </div>
-            </div>
-          </div>
+        <div className="container" style={{ padding: "100px 0px" }}>
+          <p
+            className=""
+            style={{
+              fontSize: "40px",
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            Create more with Digital Templates
+          </p>
+          <Box sx={{ flexGrow: 1 }}>
+            <Search position="static" style={{ backgroundColor: "white" }}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </Box>
         </div>
       </header>
 
-      <div className="container m-8">
-        <div className="container">
-          <div className="row">
-            {createNewFormBox()}
-            {displayTemplates()}
+      <div className="col-md-10 mx-auto m-8">
+        <div className="row mt-4">
+          <div className="col-sm-4 col-md-2">
+            <div className="card theme-accent-back" style={{ height: "100%" }}>
+              <div className="card-body text-center d-flex justify-content-between flex-column align-items-center">
+                <img
+                  src="add-btn-image.png"
+                  style={{ height: 100 }}
+                  className="d-block"
+                  alt=""
+                />
+                <Button className="w-100 mt-0">
+                  <Add /> Create New Form
+                </Button>
+              </div>
+            </div>
           </div>
+          {/* {createNewFormBox()} */}
+          {displayTemplates()}
         </div>
       </div>
     </div>

@@ -6,6 +6,8 @@ const mySchema = new Schema ({
     description : String,
     data : Object,
     user : { type: Types.ObjectId, ref: "users"},
+    dbType: String,
+    dbSrc: String,
     createdAt : Date,
     lastUpdate : Date
 });

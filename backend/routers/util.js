@@ -1,6 +1,8 @@
 const multer = require("multer");
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
+const { MongoClient } = require("mongodb");
+const FormModel = require("../models/formModel");
 
 let mailTransporter = nodemailer.createTransport({
   service: "gmail",
@@ -42,6 +44,37 @@ router.post("/sendmail", (req, res) => {
     }
     res.status.send({ message: "Mail Send" });
   });
+});
+
+const saveDocToMongoDB = async (client, obj, collectionName = "FormResponses") => {
+  
+  await client.connect();
+  // console.log('Connected successfully to server');
+  const db = client.db();
+  const collection = db.collection(collectionName);
+  await collection.insertOne(obj);
+  console.log("response saved to mongodb🍃");
+};
+
+router.post("/save-res-to-mongo", (req, res) => {
+  const { formid, resObj } = req.body;
+  FormModel.findById(formid)
+    .then((data) => {
+      const { dbSrc } = data;
+      const client = new MongoClient(dbSrc);
+      saveDocToMongoDB(client, resObj)
+        .then(console.log)
+        .catch(console.error)
+        .finally(() => client.close());
+
+      res.json({
+        message: "success",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(504).json(err);
+    });
 });
 
 module.exports = router;

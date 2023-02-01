@@ -53,6 +53,8 @@ import Swal from "sweetalert2";
 import app_config from "../../config";
 import { useNavigate, useParams } from "react-router-dom";
 import ResponseManage from "./ResponseManage";
+import SheetCreator from "./dbForms/SheetCreator";
+import MongoDB from "./dbForms/MongoDB";
 // import './addForm.css';
 
 const AddForm = () => {
@@ -80,6 +82,8 @@ const AddForm = () => {
   const [formTitle, setFormTitle] = useState("");
   const [formHeading, setFormHeading] = useState("");
   const [formDescription, setFormDescription] = useState("");
+
+  const [selDB, setSelDB] = useState(1);
 
   const formObj = {
     answer: "",
@@ -258,6 +262,15 @@ const AddForm = () => {
     setFormLoaded(true);
     setConfMsg(dbFormData.data.confirmationMsg);
     setIsQuiz();
+
+    if(dbFormData.dbType === "Sheet"){
+      setSelDB(1);
+    }
+    else if(dbFormData.dbType === "MongoDB"){
+      setSelDB(2);
+    }else if(dbFormData.dbType === "MySQL"){
+      setSelDB(3);
+    }
   };
 
   React.useEffect(() => {
@@ -461,6 +474,14 @@ const AddForm = () => {
     setFormDetails(data);
   };
 
+  const showSelDB = () => {
+    if(selDB===1){
+      return <SheetCreator formid={formid} />
+    }else if(selDB===2){
+      return <MongoDB formid={formid} dbSrc={formDetails.dbSrc} />
+    }
+  }
+
   return (
     <div
       className="main-form main-form-bg"
@@ -652,18 +673,19 @@ const AddForm = () => {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    // value={Select database}
+                    value={selDB}
                     label="Select database"
-                    // onChange={handleChange}
+                    onChange={e => setSelDB(e.target.value)}
                   >
-                    <MenuItem value={10}>Google Sheets</MenuItem>
-                    <MenuItem value={20}>MongoDB</MenuItem>
-                    <MenuItem value={30}>MySql</MenuItem>
+                    <MenuItem value={1}>CSV File</MenuItem>
+                    <MenuItem value={2}>MongoDB</MenuItem>
+                    <MenuItem value={3}>MySql</MenuItem>
                   </Select>
                 </FormControl>
                 {/* <Switch /> */}
               </ListItem>
           </List>
+          {showSelDB()}
         </TabPanel>
 
         <TabPanel value={value} index={2}>
