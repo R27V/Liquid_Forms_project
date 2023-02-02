@@ -11,7 +11,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import EllipsedLabel from "../common/EllipsedLabel";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -93,49 +92,12 @@ const ListForms = () => {
     navigate("/user/editform/" + data._id);
   };
 
-  const createNewFormBox = () => {
-    return (
-      <div className="col-sm-6 col-md-4">
-        <div
-          className="card p-4 m-4"
-          style={{
-            backgroundColor: "rgb(226 218 218)",
-          }}
-        >
-          <div className="card-body">
-            <h5 className="card-title"></h5>
-            <p className="card-text column d-flex justify-content-center align-items-center">
-              <EllipsedLabel
-                label={
-                  <div>
-                    <div className="d-flex justify-content-center align-items-center">
-                      {" "}
-                      <img src="addition.png" />
-                    </div>
-                    <div className="d-flex justify-content-center align-items-center">
-                      <button
-                        className="btn btn-primary"
-                        onClick={createNewForm}
-                      >
-                        {" "}
-                        Create New+
-                      </button>
-                    </div>
-                  </div>
-                }
-                maxLength="20"
-              />
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  
 
   const displayTemplates = () => {
     if (!loading && formList)
       return formList.map((form) => (
-        <div className="col-sm-4 col-md-3">
+        <div className="col-sm-4 col-md-3 mb-3">
           <div
             className="card h-100 theme-accent-back"
             
@@ -262,7 +224,7 @@ const ListForms = () => {
 
       <div className="col-md-10 mx-auto m-8">
         <div className="row mt-4">
-          <div className="col-sm-4 col-md-2">
+          <div className="col-sm-4 col-md-3  mb-3">
             <div className="card theme-accent-back" style={{ height: "100%" }}>
               <div className="card-body text-center d-flex justify-content-between flex-column align-items-center">
                 <img
@@ -271,7 +233,7 @@ const ListForms = () => {
                   className="d-block"
                   alt=""
                 />
-                <Button className="w-100 mt-0">
+                <Button className="w-100 mt-0" onClick={createNewForm}>
                   <Add /> Create New Form
                 </Button>
               </div>

@@ -85,11 +85,11 @@ const Header = () => {
                   Update User
                 </NavLink>
               </li> */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/user/responseManage">
                   Response Manager
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
             {/* Icons */}
             <ul className="navbar-nav d-flex flex-row me-1">
