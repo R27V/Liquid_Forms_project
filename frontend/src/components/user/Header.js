@@ -36,7 +36,7 @@ const Header = () => {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {/* Link */}
               <li className="nav-item">
-                <img src="logo.jpg" />
+                <img src="/logo.png" style={{ height: "40px" }} />
               </li>
 
               {/* <li className="nav-item">
