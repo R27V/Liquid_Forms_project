@@ -38,14 +38,14 @@ const Login = () => {
       Swal.fire({
         icon: "success",
         title: "Success",
-        text: "Loggedin Successfully",
+        text: "You have successfully logged in ☺",
       });
       // navigate("/addForm/:formid");
     } else if (response.status === 401) {
       Swal.fire({
         icon: "error",
         title: "Failed",
-        text: "Loggedin Failed",
+        text: "Invalid Credentials",
       });
     } else {
       console.log("Unknown error occured");

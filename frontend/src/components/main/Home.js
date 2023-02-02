@@ -1,48 +1,12 @@
 import React from "react";
 import BasicSlider from "../common/BasicSlider";
+import { LightSpeed,  Bounce, Slide, Fade, Zoom, Flip, Rotate } from 'react-reveal';
+
 
 const Home = () => {
   return (
     <>
-      {/* <div className="homeBody p-3">
-        <div className="d-flex  align-items-center justify-content-center">
-          <h1
-            className="m-4"
-            style={{ fontSize: "50px", color: "#232a69", fontWeight: "bolder" }}
-          >
-            Get insights quickly, with Digital Forms
-          </h1>
-        </div>
-        <div className="row">
-          <div className="col-md-6 define">
-            <div className="m-2 d-flex  align-items-start justify-content-end">
-              <div>
-                {" "}
-                <p className="header-content ">
-                  Build powerful online forms and customize them to your heart's
-                  delight.
-                </p>
-                <p style={{ fontSize: "30px" }}>
-                  Our digital form gives you an award-winning interface, easy
-                  customization, galleries, templates and reporting. Check out
-                  our popular features.
-                </p>
-                <button className="btn btn-primary"> SIGN UP NOW</button>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 main">
-            <div
-              className="d-flex  align-items-start justify-content-end"
-              style={{ height: "560px", overflow: "hidden" }}
-            >
-              <BasicSlider />
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      <div id="preview" className="preview">
+       <div id="preview" className="preview">
         <div style={{ display: "none" }} />
         <div>
           <div data-draggable="true" style={{ position: "relative" }}>
@@ -50,6 +14,7 @@ const Home = () => {
               className="d-flex  align-items-center justify-content-center"
               style={{ backgroundColor: "#d5dded" }}
             >
+             <LightSpeed right>
               <h1
                 className="m-4"
                 style={{
@@ -60,6 +25,7 @@ const Home = () => {
               >
                 Get insights quickly, with Digital Forms
               </h1>
+              </LightSpeed>
             </div>
           </div>
           <div data-draggable="true" style={{ position: "relative" }}>
@@ -87,6 +53,7 @@ const Home = () => {
                       style={{ zIndex: 10 }}
                     >
                       {" "}
+                      <Slide left>
                       <h1
                         className="my-5 display-3 fw-bold ls-tight"
                         style={{ color: "hsl(218, 81%, 95%)" }}
@@ -98,6 +65,8 @@ const Home = () => {
                           heart's delight.
                         </span>{" "}
                       </h1>{" "}
+                      </Slide>
+                      <Fade bottom>
                       <p
                         className="mb-4 opacity-70"
                         style={{
@@ -109,6 +78,7 @@ const Home = () => {
                         easy customization, galleries, templates and reporting.
                         Check out our popular features.
                       </p>{" "}
+                      </Fade> 
                     </div>{" "}
                     <div className="col-lg-6 mb-5 mb-lg-0 position-relative">
                       {" "}
@@ -124,12 +94,15 @@ const Home = () => {
                         {" "}
                         <div className="card-body px-2 py-3 px-md-2">
                           {" "}
-                          <div
+                          <Bounce top>
+                            <div
               className="d-flex  align-items-start justify-content-end"
               style={{ height: "560px", overflow: "hidden" }}
             >{" "}
               <BasicSlider />{" "}
               </div>{" "}
+            </Bounce>
+            
                         </div>{" "}
                       </div>{" "}
                     </div>{" "}
@@ -157,45 +130,57 @@ const Home = () => {
                 />{" "}
                 <div className="row">
                   {" "}
+                  
                   <div className="col-lg-3 col-md-6 mb-5 mb-lg-0 position-relative">
                     {" "}
+                    <Zoom>
                     <i
                       className="fas fa-cubes fa-3x text-primary mb-4"
                       aria-controls="#picker-editor"
-                    />{" "}
+                    />{" "} </Zoom>
                     <h5 className="text-primary fw-bold mb-3">5000+</h5>{" "}
                     <h6 className="fw-normal mb-0">Components</h6>{" "}
                     <hr className="divider-vertical d-none d-md-block" />{" "}
                   </div>{" "}
+                  
+                  
                   <div className="col-lg-3 col-md-6 mb-5 mb-lg-0 position-relative">
                     {" "}
+                    <Zoom>
                     <i
                       className="fas fa-layer-group fa-3x text-primary mb-4"
                       aria-controls="#picker-editor"
-                    />{" "}
+                    />{" "}</Zoom>
                     <h5 className="text-primary fw-bold mb-3">490+</h5>{" "}
                     <h6 className="fw-normal mb-0">Design blocks</h6>{" "}
                     <hr className="divider-vertical d-none d-lg-block" />{" "}
                   </div>{" "}
+                  
+                  
                   <div className="col-lg-3 col-md-6 mb-5 mb-lg-0 position-relative">
                     {" "}
+                     <Zoom>
                     <i
                       className="fas fa-image fa-3x text-primary mb-4"
                       aria-controls="#picker-editor"
-                    />{" "}
+                    />{" "}</Zoom>
                     <h5 className="text-primary fw-bold mb-3">100+</h5>{" "}
                     <h6 className="fw-normal mb-0">Templates</h6>{" "}
                     <hr className="divider-vertical d-none d-md-block" />{" "}
                   </div>{" "}
+                  
+                 
                   <div className="col-lg-3 col-md-6 mb-4 mb-lg-0 position-relative">
                     {" "}
+                    <Zoom>
                     <i
                       className="fas fa-plug fa-3x text-primary mb-4"
                       aria-controls="#picker-editor"
-                    />{" "}
+                    />{" "}</Zoom>
                     <h5 className="text-primary fw-bold mb-3">28</h5>{" "}
                     <h6 className="fw-normal mb-0">Plugins</h6>{" "}
                   </div>{" "}
+                  
                 </div>{" "}
               </section>
             </section>
@@ -218,7 +203,9 @@ const Home = () => {
                     <p className="text-uppercase text-primary fw-bold mb-4">
                       Features
                     </p>{" "}
+                    <Rotate top right>
                     <h2 className="fw-bold mb-4">Why is it so great?</h2>{" "}
+                    </Rotate>
                     <p className="text-muted mb-5">
                       Nunc tincidunt vulputate elit. Mauris varius purus
                       malesuada neque iaculis malesuada. Aenean gravida magna
@@ -226,6 +213,7 @@ const Home = () => {
                     </p>{" "}
                   </div>{" "}
                 </div>{" "}
+                
                 <div className="row">
                   {" "}
                   <div className="col-lg-3 col-md-6 mb-5">
@@ -365,6 +353,7 @@ const Home = () => {
                     </div>{" "}
                   </div>{" "}
                 </div>{" "}
+                
               </section>
             </section>
             {/**/}
@@ -415,12 +404,14 @@ const Home = () => {
                             {" "}
                             <div className="col-6 mb-5">
                               {" "}
+                              
                               <img
                                 src="https://mdbootstrap.com/img/Photos/new-templates/landing-page/logo6-1.png"
                                 className="img-fluid grayscale px-2 px-md-5"
                                 alt=""
                                 aria-controls="#picker-editor"
                               />{" "}
+                              
                             </div>{" "}
                             <div className="col-6 mb-5">
                               {" "}
@@ -455,12 +446,15 @@ const Home = () => {
                     </div>{" "}
                     <div className="col-lg-6 mb-5 mb-lg-0">
                       {" "}
+                      <Zoom right>
                       <img
                         src="https://mdbootstrap.com/img/new/textures/full/166.jpg"
                         className="w-100 rounded-4 shadow-4"
                         alt=""
                         aria-controls="#picker-editor"
                       />{" "}
+                       </Zoom>
+                    
                     </div>{" "}
                   </div>{" "}
                 </div>{" "}

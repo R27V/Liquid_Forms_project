@@ -477,7 +477,7 @@ const AddForm = () => {
         <Card className="my-2">
           <CardContent>
             <div className="d-flex justify-content-start align-items-center">
-              <TextField
+              <TextField className="mr-3"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -488,11 +488,9 @@ const AddForm = () => {
                 variant="standard"
                 onChange={(e) => setFormTitle(e.target.value)}
                 value={formTitle}
+                
               />
-              <button className="btn btn-primary m-2" onClick={updateForm}>
-                Save Form
-              </button>
-              <Tooltip title="Preview Form">
+               <Tooltip title="Preview Form" className="mr-2">
                 <IconButton
                   color="secondary"
                   onClick={() => navigate("/main/preview/" + formDetails._id)}
@@ -500,6 +498,10 @@ const AddForm = () => {
                   <Visibility />
                 </IconButton>
               </Tooltip>
+              <button className="btn btn-primary m-2" onClick={updateForm}>
+                Save Form
+              </button>
+             
             </div>
           </CardContent>
         </Card>

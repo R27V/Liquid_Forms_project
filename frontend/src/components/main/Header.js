@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
-  const [loggedin, setLoggedin] = useState(false);
+  // const [loggedin, setLoggedin] = useState(false);
 
   return (
     <>
@@ -59,11 +59,11 @@ const Header = () => {
                   Contact Information
                 </NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/main/login">
                   Add Form
                 </NavLink>
-              </li>
+              </li> */}
 
               {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/user/listForm">
@@ -82,7 +82,7 @@ const Header = () => {
               </li> */}
             </ul>
             {/* Icons */}
-            <ul className="navbar-nav d-flex flex-row me-1">
+            {/* <ul className="navbar-nav d-flex flex-row me-1">
               <li className="nav-item me-3 me-lg-0">
                 {loggedin ? (
                   <button
@@ -98,6 +98,20 @@ const Header = () => {
                     <i className="fas fa-sign-in"></i> Login
                   </NavLink>
                 )}
+              </li>
+            </ul> */}
+
+
+<ul className="navbar-nav mb-2 mb-lg-0">
+              <li className="nav-item me-2">
+                <NavLink className="btn btn-primary" to="/main/signup">
+                  Create Account
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="btn btn-primary" to="/main/login">
+                  Signin
+                </NavLink>
               </li>
             </ul>
           </div>

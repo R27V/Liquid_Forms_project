@@ -140,7 +140,7 @@ const Header = () => {
                   </div>
                 </div>
               </li>
-              <li className="nav-item me-3 me-lg-0">
+              {/* <li className="nav-item me-3 me-lg-0">
                 {loggedin ? (
                   <button
                     className="btn btn-danger"
@@ -155,7 +155,7 @@ const Header = () => {
                     <i className="fas fa-sign-in"></i> Login
                   </NavLink>
                 )}
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
