@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import app_config from "../../config";
-// import { useUserContext } from "../../context/UserProvider";
+import { useUserContext } from "../../context/UserProvider";
 
 const Header = () => {
-  const [loggedin, setLoggedin] = useState(false);
+  const { loggedin, setLoggedin, logout } = useUserContext();
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
@@ -126,6 +126,11 @@ const Header = () => {
                           My profile
                         </NavLink>
                       </li>
+                      <li>
+                  <button onClick={logout} className="dropdown-item">
+                    Logout
+                  </button>
+                </li>
 
                       {/* <li>
                   <button onClick={logout} className="dropdown-item" href="#">
