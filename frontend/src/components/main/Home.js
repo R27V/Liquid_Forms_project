@@ -9,25 +9,7 @@ const Home = () => {
        <div id="preview" className="preview">
         <div style={{ display: "none" }} />
         <div>
-          <div data-draggable="true" style={{ position: "relative" }}>
-            <div
-              className="d-flex  align-items-center justify-content-center"
-              style={{ backgroundColor: "#d5dded" }}
-            >
-             <LightSpeed right>
-              <h1
-                className="m-4"
-                style={{
-                  fontSize: "50px",
-                  color: "#232a69",
-                  fontWeight: "bolder",
-                }}
-              >
-                Get insights quickly, with Digital Forms
-              </h1>
-              </LightSpeed>
-            </div>
-          </div>
+         
           <div data-draggable="true" style={{ position: "relative" }}>
             {/**/}
             {/**/}
@@ -44,14 +26,60 @@ const Home = () => {
                       " .background-radial-gradient { background-color: hsl(218, 41%, 15%); background-image: radial-gradient( 650px circle at 0% 0%, hsl(218, 41%, 35%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100% ), radial-gradient( 1250px circle at 100% 100%, hsl(218, 41%, 45%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100% ); } #radius-shape-1 { height: 220px; width: 220px; top: -60px; left: -130px; background: radial-gradient(#44006b, #ad1fff); overflow: hidden; } #radius-shape-2 { border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%; bottom: -60px; right: -110px; width: 300px; height: 300px; background: radial-gradient(#44006b, #ad1fff); overflow: hidden; } .bg-glass { background-color: hsla(0, 0%, 100%, 0.9) !important; backdrop-filter: saturate(200%) blur(25px); } ",
                   }}
                 />{" "}
-                <div className="container px-4 py-5 px-md-5 text-center text-lg-start">
+                <div className="container text-center text-lg-start">
                   {" "}
-                  <div className="row gx-lg-5 align-items-center mb-5">
+                  {/* <div className="row gx-lg-5 align-items-center mb-5"> */}
                     {" "}
                     <div
-                      className="col-lg-6 mb-5 mb-lg-0"
+                      className="mb-5 mb-lg-0"
                       style={{ zIndex: 10 }}
                     >
+                       <div data-draggable="true" style={{ position: "relative" }}>
+            <div
+              className="d-flex  align-items-center justify-content-center"
+              // style={{ backgroundColor: "#d5dded" }}
+            >
+             <LightSpeed right>
+              <h1
+                className="m-4"
+                style={{
+                  fontSize: "50px",
+                  color: "white",
+                  fontWeight: "bolder",
+                }}
+              >
+                Get insights quickly, with Digital Forms
+              </h1>
+              </LightSpeed>
+            </div>
+          </div>
+
+          <div className="mb-5 mb-lg-0 position-relative">
+                      {" "}
+                      <div
+                        id="radius-shape-1"
+                        className="position-absolute rounded-circle shadow-5-strong"
+                      />{" "}
+                      <div
+                        id="radius-shape-2"
+                        className="position-absolute shadow-5-strong"
+                      />{" "}
+                      <div className="card bg-glass">
+                        {" "}
+                        <div className="card-body px-2 py-3 px-md-2">
+                          {" "}
+                          <Bounce top>
+                            <div
+              className="d-flex  align-items-start justify-content-end"
+              style={{ height: "760px", overflow: "hidden" }}
+            >{" "}
+              <BasicSlider />{" "}
+              </div>{" "}
+            </Bounce>
+            
+                        </div>{" "}
+                      </div>{" "}
+                    </div>{" "}
                       {" "}
                       <Slide left>
                       <h1
@@ -80,33 +108,8 @@ const Home = () => {
                       </p>{" "}
                       </Fade> 
                     </div>{" "}
-                    <div className="col-lg-6 mb-5 mb-lg-0 position-relative">
-                      {" "}
-                      <div
-                        id="radius-shape-1"
-                        className="position-absolute rounded-circle shadow-5-strong"
-                      />{" "}
-                      <div
-                        id="radius-shape-2"
-                        className="position-absolute shadow-5-strong"
-                      />{" "}
-                      <div className="card bg-glass">
-                        {" "}
-                        <div className="card-body px-2 py-3 px-md-2">
-                          {" "}
-                          <Bounce top>
-                            <div
-              className="d-flex  align-items-start justify-content-end"
-              style={{ height: "560px", overflow: "hidden" }}
-            >{" "}
-              <BasicSlider />{" "}
-              </div>{" "}
-            </Bounce>
-            
-                        </div>{" "}
-                      </div>{" "}
-                    </div>{" "}
-                  </div>{" "}
+                   
+                  {/* </div>{" "} */}
                 </div>{" "}
               </section>
             </section>
